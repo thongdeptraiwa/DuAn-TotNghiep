@@ -7,13 +7,13 @@ import Demo from '../components/Demo';
 
 const AppNavigation = () => {
 
-  const dispatch = useDispatch()
+  // const dispatch = useDispatch()
 
-  useEffect(() => {
-    dispatch(listProducts());
-    return () => {
-    }
-  }, [])
+  // useEffect(() => {
+  //   dispatch(listProducts());
+  //   return () => {
+  //   }
+  // }, [])
 
   return (
     <NavigationContainer>
