@@ -3,8 +3,8 @@ import { NavigationContainer } from '@react-navigation/native';
 
 import { useSelector, useDispatch } from 'react-redux';
 import { listProducts } from '../rtk/API';
-import Demo from '../components/Demo';
-
+import Home from '../components/Home';
+import Profile from '../components/Profile';
 const AppNavigation = () => {
 
   // const dispatch = useDispatch()
@@ -21,7 +21,8 @@ const AppNavigation = () => {
         user ? <ProductNavigation /> : <UserNavigation />
       } */}
       {/* <ProductNavigation /> */}
-      <Demo />
+      {/* <Home /> */}
+      <Profile />
     </NavigationContainer>
   )
 }
