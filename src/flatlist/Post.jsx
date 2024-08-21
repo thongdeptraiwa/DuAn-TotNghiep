@@ -1,44 +1,12 @@
 import { Image, StyleSheet, Text, TouchableOpacity, View } from 'react-native'
 import React, { useState } from 'react'
 import PostS from '../components/styles/PostS';
-// npm install react-natnpm ruive-vector-icons
-import Icon from 'react-native-vector-icons/Ionicons'; // Hoặc một bộ icon khác
-import * as Animatable from 'react-native-animatable';
+import Icon from 'react-native-vector-icons/Ionicons'; 
 
 const Post = (props) => {
     const { dataP } = props
     const [like, setLike] = useState(false)
-    const [hearts, setHearts] = useState([]);
-
-    const handleLike = () => {
-        setLike(!like);
-
-        if (!like) {
-            const newHeart = (
-                <Animatable.View
-                    key={Date.now()}
-                    animation="bounceIn"
-                    duration={500}
-                    style={styles.heartAnimation}
-                    onAnimationEnd={() => removeHeart(Date.now())}
-                >
-                    <Icon name="heart" size={30} color="red" />
-                </Animatable.View>
-            );
-
-            setHearts((prevHearts) => [...prevHearts, newHeart]);
-
-            // Auto-remove heart after animation (1s)
-            setTimeout(() => {
-                removeHeart(Date.now());
-            }, 1000);
-        }
-    };
-
-    const removeHeart = (key) => {
-        setHearts((prevHearts) => prevHearts.filter((heart) => heart.key !== key));
-    };
-
+   
     return (
         <View style={PostS.container}>
             <View style={PostS.h2}>
