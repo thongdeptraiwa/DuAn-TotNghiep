@@ -1,22 +1,22 @@
 import { Image, StyleSheet, Text, TouchableOpacity, View } from 'react-native'
 import React, { useState } from 'react'
-import PostS from '../components/styles/PostS';
-// npm install react-natnpm ruive-vector-icons
-import Icon from 'react-native-vector-icons/Ionicons'; // Hoặc một bộ icon khác
-const ProfilePost = (props) => {
-    const { dataProfile } = props
-    const [like, setLike] = useState(false)
+import PostS from '../../styles/PostS';
+import Icon from 'react-native-vector-icons/Ionicons'; 
 
+const Post = (props) => {
+    const { dataP } = props
+    const [like, setLike] = useState(false)
+   
     return (
         <View style={PostS.container}>
             <View style={PostS.h2}>
                 <View style={PostS.header}>
                     <View>
-                        <Image style={PostS.avata} source={{ uri: dataProfile.avata }} />
+                        <Image style={PostS.avata} source={{ uri: dataP.avata }} />
                     </View>
                     <View>
-                        <Text style={PostS.name}>{dataProfile.name}</Text>
-                        <Text style={PostS.fontDate}>{dataProfile.date}</Text>
+                        <Text style={PostS.name}>{dataP.name}</Text>
+                        <Text style={PostS.fontDate}>{dataP.date}</Text>
                     </View>
                 </View>
                 <View>
@@ -24,8 +24,8 @@ const ProfilePost = (props) => {
                 </View>
             </View>
             <View style={PostS.body}>
-                <Text style={PostS.title}>{dataProfile.title}</Text>
-                <Image style={PostS.image} source={{ uri: dataProfile.image }} />
+                <Text style={PostS.title}>{dataP.title}</Text>
+                <Image style={PostS.image} source={{ uri: dataP.image }} />
             </View>
             <View style={PostS.interact}>
                 <TouchableOpacity onPress={() => { setLike(!like) }}>
@@ -38,4 +38,4 @@ const ProfilePost = (props) => {
     )
 }
 
-export default ProfilePost
+export default Post

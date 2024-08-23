@@ -2,7 +2,7 @@ import axios from 'axios';
 
 const AxiosHelper = (token = '', contentType = 'application/json') => {
     const axiosInstance = axios.create({
-        baseURL: 'https://65ba71c0b4d53c066552ec1c.mockapi.io/'
+        baseURL: 'https://duan-totnghiep.onrender.com/'
     });
     // cmd -----> ipconfig -----> IPv4 Address (192.168.1.1)
     axiosInstance.interceptors.request.use(

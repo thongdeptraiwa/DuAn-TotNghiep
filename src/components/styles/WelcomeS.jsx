@@ -17,16 +17,17 @@ const styles = StyleSheet.create({
         fontSize: 30,
         fontWeight: 'bold',
         marginTop: 20,
+        color: colors.blackFont,
         textAlign: 'center',
     },
     subtitle: {
         fontSize: 16,
-        color: '#777',
+        color: colors.blackFont,
         textAlign: 'center',
         marginVertical: 20,
     },
     button: {
-        backgroundColor: colors.background,
+        backgroundColor: colors.Bluebackground,
         paddingVertical: 15,
         paddingHorizontal: 40,
         borderRadius: 25,
@@ -39,7 +40,7 @@ const styles = StyleSheet.create({
     footerText: {
         marginTop: 20,
         fontSize: 14,
-        color: '#777',
+        color: colors.blackFont,
     },
     loginText: {
         color: colors.linkText,

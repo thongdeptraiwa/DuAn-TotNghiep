@@ -6,7 +6,7 @@ const styles = StyleSheet.create({
     backgroundColor: '#fff'
   },
   container: {
-    flex: 0.8,
+    flex: 0.9,
     paddingHorizontal: 20,
     justifyContent: 'center',
     backgroundColor: '#fff',
@@ -19,7 +19,7 @@ const styles = StyleSheet.create({
     color: '#000',
   },
   subheaderText: {
-    fontSize: 20,
+    fontSize: 18,
     fontWeight: '500',
     color: colors.linkText,
   },
@@ -30,7 +30,7 @@ const styles = StyleSheet.create({
     marginBottom: 30,
   },
   loginButton: {
-    backgroundColor: colors.background,
+    backgroundColor: colors.Bluebackground,
     paddingVertical: 15,
     borderRadius: 25,
     justifyContent: 'center',
@@ -51,6 +51,11 @@ const styles = StyleSheet.create({
     color: colors.linkText,
     fontWeight: 'bold',
   },
+  logo: {
+    borderRadius: 50,
+    width: 70,
+    height: 70
+  }
 });
 
 export default styles;

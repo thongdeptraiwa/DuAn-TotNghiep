@@ -2,7 +2,7 @@ import { ScrollView, Image, StyleSheet, Text, TouchableOpacity, View } from 'rea
 import React from 'react'
 import ProfileS from '../styles/ProfileS';
 import Icon from 'react-native-vector-icons/Ionicons'; // Hoặc một bộ icon khác
-import ProfilePost from '../../items/ProfilePost';
+import ProfilePost from '../custom/items/ProfilePost';
 
 let date = new Date().toDateString()
 const listPostProfile = [

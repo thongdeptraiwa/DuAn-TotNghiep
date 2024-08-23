@@ -1,23 +1,45 @@
 import { createAsyncThunk } from '@reduxjs/toolkit'
 import AxiosHelper from '../helpers/AxiosHelper'
 
-export const listProducts = createAsyncThunk(
-    "products",
+export const login = createAsyncThunk(
+    'user/login',
     async (data, { rejectWithValue }) => {
-        try {
-            const response = await AxiosHelper()
-                .get("/products", data);
-
-            console.log(response);
-            return response;
-
-
-        } catch (error) {
-            console.log(error);
-            return rejectWithValue(error);
+      try {
+        const response = await AxiosHelper().post('user/login', data);
+        console.log(response)
+        if (response.status == true) {
+          return response.user;
+        } else {
+          return rejectWithValue(response.data.message);
         }
+      } catch (error) {
+        return rejectWithValue(error.message);
+      }
     }
-);
+  );
+
+
+
+export const register = createAsyncThunk(
+  'user/register',
+  async (data, {rejectWithValue}) => {
+    try {
+      const response = await AxiosHelper().post('user/add', data)
+      console.log(response)
+      if (response.status == true){
+        return response.message;
+      } else {
+        return rejectWithValue(response.data.message);
+      }
+    } catch (error) {
+      return rejectWithValue(error.message);
+    }
+  }
+)
+
+
+
+
 
 
 

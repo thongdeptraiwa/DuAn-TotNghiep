@@ -1,10 +1,11 @@
 import React, { useEffect } from 'react'
 import { NavigationContainer } from '@react-navigation/native';
 
-import Login from '../components/Screens/Login';
-import Welcome from '../components/Screens/Welcome';
-import Home from '../components/Screens/Home';
-import Profile from '../components/Screens/Profile';
+import Login from '../components/user/Login';
+import Welcome from '../components/user/Welcome';
+import Home from '../components/home/Home';
+import Profile from '../components/user/Profile';
+import Register from '../components/user/Register';
 import { createNativeStackNavigator } from '@react-navigation/native-stack';
 
 const Stack = createNativeStackNavigator();
@@ -47,6 +48,11 @@ const AppNavigation = () => {
         <Stack.Screen
           name='Profile'
           component={Profile}
+          options={{ headerShown: false }}
+        />
+         <Stack.Screen
+          name='Register'
+          component={Register}
           options={{ headerShown: false }}
         />
 

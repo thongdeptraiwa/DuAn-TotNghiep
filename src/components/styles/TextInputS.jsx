@@ -2,11 +2,12 @@ import { StyleSheet } from "react-native";
 
 const inputStyles = StyleSheet.create({
   inputContainer: {
+    marginVertical: 5,
     flexDirection: 'row',
     alignItems: 'center',
     backgroundColor: '#f5f5f5',
     borderRadius: 15,
-    marginBottom: 20,
+    marginBottom: 18,
     paddingHorizontal: 15,
   },
   icon: {

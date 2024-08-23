@@ -3,6 +3,7 @@ import { listProducts } from "./API";
 
 const initialState = {
     products: [],
+    user: null,
 };
 
 const appSlice = createSlice({
