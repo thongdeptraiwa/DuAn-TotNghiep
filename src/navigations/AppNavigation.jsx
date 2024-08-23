@@ -21,8 +21,8 @@ const AppNavigation = () => {
         user ? <ProductNavigation /> : <UserNavigation />
       } */}
       {/* <ProductNavigation /> */}
-      {/* <Home /> */}
-      <Profile />
+      <Home />
+      {/* <Profile /> */}
     </NavigationContainer>
   )
 }

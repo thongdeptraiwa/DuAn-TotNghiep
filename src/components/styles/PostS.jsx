@@ -47,6 +47,40 @@ const PostS = StyleSheet.create({
         flexDirection: 'row',
         alignItems: 'center',
         justifyContent: 'space-between'
+    },
+    modalContent: {
+        backgroundColor: 'white',
+        padding: 20,
+        borderRadius: 10,
+        minHeight: 300,
+    },
+    modalHeader: {
+        fontSize: 18,
+        fontWeight: 'bold',
+        marginBottom: 15,
+    },
+    comment: {
+        paddingVertical: 10,
+        borderBottomWidth: 1,
+        borderBottomColor: '#eee',
+    },
+    inputContainer: {
+        flexDirection: 'row',
+        alignItems: 'center',
+        marginTop: 15,
+    },
+    input: {
+        flex: 1,
+        borderColor: 'gray',
+        borderWidth: 1,
+        borderRadius: 5,
+        paddingHorizontal: 10,
+        marginRight: 10,
+    },
+    line: {
+        borderColor:'black',
+        borderWidth: 0.2,
+        marginVertical: 20
     }
 })
 

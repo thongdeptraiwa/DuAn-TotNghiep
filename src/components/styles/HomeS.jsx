@@ -10,6 +10,11 @@ const HomeS = StyleSheet.create({
         fontWeight: "bold",
         color: "black"
     },
+    h1Black: {
+        fontSize: 30,
+        fontWeight: "bold",
+        color: "white"
+    },
     avata: {
         width: 40,
         height: 40,
@@ -27,7 +32,11 @@ const HomeS = StyleSheet.create({
     },
     all: {
         backgroundColor: "#f7f7f7"
+    },
+    allBlack: {
+        backgroundColor: "black"
     }
+
 })
 
 export default HomeS
