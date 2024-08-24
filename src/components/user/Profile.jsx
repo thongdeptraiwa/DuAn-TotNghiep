@@ -1,9 +1,10 @@
-import { ScrollView, Image, StyleSheet, Text, TouchableOpacity, View } from 'react-native'
+import { ScrollView, Image, StyleSheet, Text, TouchableOpacity, View, ToastAndroid } from 'react-native'
 import React from 'react'
-import ProfileS from '../styles/ProfileS';
+import ProfileS from '../styles/user/ProfileS';
 import Icon from 'react-native-vector-icons/Ionicons'; // Hoặc một bộ icon khác
 import ProfilePost from '../custom/items/ProfilePost';
-
+import { logout } from '../../rtk/Reducer';
+import { useDispatch } from 'react-redux';
 let date = new Date().toDateString()
 const listPostProfile = [
     {
@@ -34,7 +35,12 @@ const listPostProfile = [
 
 const Profile = (props) => {
     const { navigation } = props;
+    const dispatch = useDispatch();
 
+    const onLogout = () => {
+        dispatch(logout());
+        ToastAndroid.show('Đã đăng xuất', ToastAndroid.SHORT)
+      };
     return (
         <ScrollView style={ProfileS.all}>
             <View style={ProfileS.superBox}>
@@ -43,7 +49,7 @@ const Profile = (props) => {
                         <Icon name="arrow-back-circle" size={30} color="black" />
                     </TouchableOpacity>
                     <Text style={ProfileS.h1}>Profile</Text>
-                    <TouchableOpacity style={{ backgroundColor: '#f3a8ac', borderRadius: 90, padding: 5 }}>
+                    <TouchableOpacity style={{ backgroundColor: '#f3a8ac', borderRadius: 90, padding: 5 }} onPress={onLogout}>
                         <Icon name="log-out-outline" size={20} color="red" />
                     </TouchableOpacity>
                 </View>

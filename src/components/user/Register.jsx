@@ -1,8 +1,8 @@
 import React, { useState } from 'react';
 import { Text, View, TouchableOpacity, Pressable, ToastAndroid } from 'react-native';
-import styles from '../styles/LoginS';
+import styles from '../styles/user/LoginS';
 import Icon from 'react-native-vector-icons/Ionicons';
-import { CustomTextInputEmail, CustomTextInputPassword, CustomTextInputRePassword, CustomTextInputUserName } from '../custom/CustomTextInput';
+import { CustomTextInputEmail, CustomTextInputPassword, CustomTextInputRePassword, CustomTextInputUserName } from '../custom/textinputs/CustomTextInput';
 import { register } from '../../rtk/API';
 import { useDispatch } from 'react-redux';
 const Register = (props) => {
@@ -16,14 +16,16 @@ const Register = (props) => {
 
   const onRegister = () => {
     const userDataRegister = { displayName, email, password };
-    console.log('User Data Register:', userDataRegister);  // Kiểm tra dữ liệu gửi đi
+
     dispatch(register(userDataRegister))
       .unwrap()
       .then((response) => {
+        ToastAndroid.show('Đăng ký thành công', ToastAndroid.SHORT)
+        
         navigation.navigate('Login');
       })
       .catch((error) => {
-        console.log('Error:', error);  // Kiểm tra lỗi nhận được
+        console.log('Error:', error); 
       });
   };
   

@@ -1,6 +1,6 @@
 import React from 'react';
 import { StyleSheet, Text, View, Image, TouchableOpacity } from 'react-native';
-import styles from '../styles/WelcomeS';
+import styles from '../styles/user/WelcomeS';
 
 const Welcome = (props) => {
   const {navigation} = props;
@@ -14,7 +14,7 @@ const Welcome = (props) => {
       <Text style={styles.title}>LinkUp!</Text>
       <Text style={styles.subtitle}>Where every thought finds a home and every image tells a story.</Text>
       
-      <TouchableOpacity style={styles.button} onPress={() => navigation.navigate('Home')}>
+      <TouchableOpacity style={styles.button} >
         <Text style={styles.buttonText}>Getting Started</Text>
       </TouchableOpacity>
       

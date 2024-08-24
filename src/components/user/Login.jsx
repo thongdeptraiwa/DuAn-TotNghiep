@@ -1,10 +1,11 @@
 import React, { useState } from 'react';
 import { Text, View, TouchableOpacity, Pressable, Alert, ToastAndroid } from 'react-native';
-import styles from '../styles/LoginS';
+import styles from '../styles/user/LoginS';
 import Icon from 'react-native-vector-icons/Ionicons';
-import { CustomTextInputEmail, CustomTextInputPassword } from '../custom/CustomTextInput';
+
 import { login } from '../../rtk/API';
 import { useDispatch } from 'react-redux';
+import { CustomTextInputEmail, CustomTextInputPassword } from '../custom/textinputs/CustomTextInput';
 const Login = (props) => {
   const { navigation } = props;
   const dispatch = useDispatch();
@@ -17,7 +18,6 @@ const Login = (props) => {
       .unwrap()
       .then((user) => {
         ToastAndroid.show('Đăng nhập thành công', ToastAndroid.SHORT)
-        navigation.navigate('Home')
       })
       .catch((error) =>{
         console.error(error);

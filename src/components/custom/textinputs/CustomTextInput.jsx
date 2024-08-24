@@ -2,7 +2,7 @@ import React from 'react';
 import { View, TextInput } from 'react-native';
 import { FontAwesomeIcon } from '@fortawesome/react-native-fontawesome';
 import { faEnvelope, faLock, faUser,faRedo } from '@fortawesome/free-solid-svg-icons';
-import inputStyles from '../styles/TextInputS';
+import inputStyles from '../../styles/user/TextInputS';
 
 
 export const CustomTextInputUserName = ({ placeholder, onChangeText, value }) => {

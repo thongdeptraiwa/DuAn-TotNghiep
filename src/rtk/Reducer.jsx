@@ -1,5 +1,6 @@
 import { createSlice } from "@reduxjs/toolkit";
-import { listProducts } from "./API";
+import { listProducts, login } from "./API";
+import { ToastAndroid } from "react-native";
 
 const initialState = {
     products: [],
@@ -13,6 +14,11 @@ const appSlice = createSlice({
 
         clearProducts: (state, action) => {
             state.products = [];
+        },
+
+        // Đăng xuất người dùng
+        logout: (state) => {
+            state.user = null;
         }
     },
     // extraReducers: (builder) => {
@@ -28,9 +34,14 @@ const appSlice = createSlice({
     //         state.products = null;
     //     });
     // }
+    extraReducers: (builder) => {
+        builder.addCase(login.fulfilled, (state, action) => {
+            state.user = action.payload; // Cập nhật user khi đăng nhập thành công
+        });
+    }
 });
 
-export const { clearProducts } = appSlice.actions;
+export const { clearProducts, logout } = appSlice.actions;
 export default appSlice.reducer;
 
 

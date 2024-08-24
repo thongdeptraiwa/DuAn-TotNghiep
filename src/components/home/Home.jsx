@@ -1,6 +1,6 @@
 import { FlatList, Image, Pressable, ScrollView, StyleSheet, Text, View } from 'react-native'
 import React from 'react'
-import HomeS from '../styles/HomeS';
+import HomeS from '../styles/home/HomeS';
 import Post from '../custom/items/Post';
 import Icon from 'react-native-vector-icons/Ionicons'; // Hoặc một bộ icon khác
 let date = new Date().toDateString()
