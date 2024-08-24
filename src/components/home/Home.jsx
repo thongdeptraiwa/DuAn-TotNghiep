@@ -1,8 +1,13 @@
 import { FlatList, Image, Pressable, ScrollView, StyleSheet, Text, View } from 'react-native'
-import React from 'react'
+import React, { useState, useEffect } from 'react'
 import HomeS from '../styles/home/HomeS';
 import Post from '../custom/items/Post';
+
+// test Thong
+import { useDispatch } from 'react-redux'
+
 import Icon from 'react-native-vector-icons/Ionicons'; // Hoặc một bộ icon khác
+import { getAllUsers } from '../../rtk/API';
 let date = new Date().toDateString()
 const listPost = [
     {
@@ -47,7 +52,27 @@ const listPost = [
     },
 ]
 const Home = (props) => {
-    const {navigation} = props;
+    const { navigation } = props;
+
+    //test Thong
+    const [users, setUsers] = useState([]);
+    const dispatch = useDispatch();
+    const getTest = async () => {
+        try {
+            const result = await dispatch(getAllUsers())
+            //console.log("===>", result);
+            setUsers(result.payload);
+        } catch (error) {
+            console.log(error)
+        }
+    }
+    useEffect(() => {
+        getTest();
+        //console.log(users);
+        return () => {
+        }
+    }, [users])
+
     return (
         <View style={{ flex: 1, backgroundColor: "#f7f7f7" }}>
             <View style={HomeS.container}>
@@ -58,7 +83,7 @@ const Home = (props) => {
                     <View style={HomeS.row}>
                         <Icon name="heart-outline" size={30} color="black" style={{ marginRight: 15 }} />
                         <Icon name="add-circle-outline" size={30} color="black" style={{ marginRight: 15 }} />
-                        <Pressable onPress={()=> navigation.navigate('Profile')}>
+                        <Pressable onPress={() => navigation.navigate('Profile')}>
                             <Image style={HomeS.avatar} source={{ uri: "https://img.freepik.com/free-psd/3d-illustration-human-avatar-profile_23-2150671142.jpg" }} />
                         </Pressable>
                     </View>
