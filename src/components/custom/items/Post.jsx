@@ -1,6 +1,6 @@
-import { Image, StyleSheet, Text, TouchableOpacity, View } from 'react-native'
+import { Image, Text, TouchableOpacity, View } from 'react-native'
 import React, { useState } from 'react'
-import PostS from '../../styles/custom/PostS';
+import PostS from '../../styles/custom/items/PostS';
 import Icon from 'react-native-vector-icons/Ionicons'; 
 
 const Post = (props) => {

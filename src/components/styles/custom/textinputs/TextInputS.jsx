@@ -12,7 +12,6 @@ const inputStyles = StyleSheet.create({
   },
   icon: {
     marginRight: 10,
-    color: '#999',
   },
   input: {
     flex: 1,

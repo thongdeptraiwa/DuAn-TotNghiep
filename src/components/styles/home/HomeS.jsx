@@ -10,7 +10,7 @@ const HomeS = StyleSheet.create({
         fontWeight: "bold",
         color: "black"
     },
-    avata: {
+    avatar: {
         width: 40,
         height: 40,
         borderRadius: 10

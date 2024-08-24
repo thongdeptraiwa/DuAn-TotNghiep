@@ -59,7 +59,7 @@ const Home = (props) => {
                         <Icon name="heart-outline" size={30} color="black" style={{ marginRight: 15 }} />
                         <Icon name="add-circle-outline" size={30} color="black" style={{ marginRight: 15 }} />
                         <Pressable onPress={()=> navigation.navigate('Profile')}>
-                            <Image style={HomeS.avata} source={{ uri: "https://img.freepik.com/free-psd/3d-illustration-human-avatar-profile_23-2150671142.jpg" }} />
+                            <Image style={HomeS.avatar} source={{ uri: "https://img.freepik.com/free-psd/3d-illustration-human-avatar-profile_23-2150671142.jpg" }} />
                         </Pressable>
                     </View>
                 </View>

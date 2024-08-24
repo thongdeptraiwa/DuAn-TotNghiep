@@ -16,12 +16,12 @@ const Register = (props) => {
 
   const onRegister = () => {
     const userDataRegister = { displayName, email, password };
-
+    
     dispatch(register(userDataRegister))
       .unwrap()
       .then((response) => {
         ToastAndroid.show('Đăng ký thành công', ToastAndroid.SHORT)
-        
+
         navigation.navigate('Login');
       })
       .catch((error) => {

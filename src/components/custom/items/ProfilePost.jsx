@@ -1,8 +1,7 @@
-import { Image, StyleSheet, Text, TouchableOpacity, View } from 'react-native'
+import { Image, Text, TouchableOpacity, View } from 'react-native'
 import React, { useState } from 'react'
 import PostS from '../../styles/custom/PostS';
-// npm install react-natnpm ruive-vector-icons
-import Icon from 'react-native-vector-icons/Ionicons'; // Hoặc một bộ icon khác
+import Icon from 'react-native-vector-icons/Ionicons'; 
 const ProfilePost = (props) => {
     const { dataProfile } = props
     const [like, setLike] = useState(false)
