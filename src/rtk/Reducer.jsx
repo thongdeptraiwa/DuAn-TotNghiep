@@ -1,10 +1,12 @@
 import { createSlice } from "@reduxjs/toolkit";
-import { listProducts, login } from "./API";
-import { ToastAndroid } from "react-native";
+import {login } from "./API";
+
 
 const initialState = {
     products: [],
     user: null,
+    status: 'idle',
+    error: null
 };
 
 const appSlice = createSlice({
@@ -21,22 +23,17 @@ const appSlice = createSlice({
             state.user = null;
         }
     },
-    // extraReducers: (builder) => {
-    //     builder.addCase(listProducts.pending, (state, action) => {
-    //         console.log("...Pending");
-    //     });
-    //     builder.addCase(listProducts.fulfilled, (state, action) => {
-    //         state.products = action.payload;
-    //         //console.log(action.payload);
-    //     });
-    //     builder.addCase(listProducts.rejected, (state, action) => {
-    //         console.log("...Rejected");
-    //         state.products = null;
-    //     });
-    // }
     extraReducers: (builder) => {
+        builder.addCase(login.pending, (state) => {
+            console.log("...loading");
+            state.status = 'loading';
+        });
         builder.addCase(login.fulfilled, (state, action) => {
             state.user = action.payload; // Cập nhật user khi đăng nhập thành công
+        });
+        builder.addCase(login.rejected, (state, action) => {
+            console.log("...Rejected");
+            state.error = action.error.message; 
         });
     }
 });
