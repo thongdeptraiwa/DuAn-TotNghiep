@@ -43,23 +43,23 @@ const ProfileS = StyleSheet.create({
     contact: {
         marginTop: 15
     },
-    row:{
+    row: {
         marginTop: 5,
-        flexDirection:'row',
-        alignItems:'center'
+        flexDirection: 'row',
+        alignItems: 'center'
     },
-    h3:{
-        color:'gray',
+    h3: {
+        color: 'gray',
         marginLeft: 7
     },
-    content:{
-        marginTop:20,
-        alignItems:'center'
+    content: {
+        marginVertical: 20,
+        alignItems: 'center'
     },
-    bio:{
-        color:'gray',
-        fontSize:15,
-        fontWeight:'bold'
+    bio: {
+        color: 'gray',
+        fontSize: 15,
+        fontWeight: 'bold',
     }
 })
 

@@ -1,8 +1,10 @@
 import { FlatList, Image, ScrollView, StyleSheet, Text, TouchableOpacity, View } from 'react-native'
-import React, { useState } from 'react'
+import React, { useState, useEffect } from 'react'
 import HomeS from './styles/HomeS'
-import Post from './flatlist/Post'
+import Post from './custom/Post'
 import Icon from 'react-native-vector-icons/Ionicons'; // Hoặc một bộ icon khác
+import { getPost } from '../rtk/API';
+import { useDispatch } from 'react-redux';
 let date = new Date().toDateString()
 const listPost = [
     {
@@ -48,6 +50,14 @@ const listPost = [
 ]
 const Home = () => {
     const [mode, setMode] = useState(false)
+    const [post, setPost] = useState([])
+    const dispatch = useDispatch()
+    // useEffect(() => {
+    //     dispatch(getPost())
+    //         .unwrap()
+    //         .then(data => { setPost(data) })
+    //         .catch(error => { console.log(error) })
+    // }, [])
     return (
         <View style={!mode ? HomeS.all : HomeS.allBlack}>
             <View style={HomeS.container}>
@@ -80,7 +90,7 @@ const Home = () => {
                     renderItem={({ item }) => <Post dataP={item} />}
                     keyExtractor={(item) => item.id}
                     showsVerticalScrollIndicator={false}
-                    contentContainerStyle={{ paddingBottom: "auto" }}
+                    contentContainerStyle={{ paddingBottom: "50%" }}
                 />
             </View>
         </View>

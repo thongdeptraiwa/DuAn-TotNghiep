@@ -3,7 +3,7 @@ import React from 'react'
 
 const HomeS = StyleSheet.create({
     container: {
-        marginHorizontal: 20,
+        marginHorizontal: 10,
     },
     h1: {
         fontSize: 30,

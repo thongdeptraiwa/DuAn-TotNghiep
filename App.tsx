@@ -9,18 +9,21 @@ import AppNavigation from './src/navigations/AppNavigation';
 import { Provider } from 'react-redux'
 import { store, persistor } from './src/rtk/Store';
 import { PersistGate } from 'redux-persist/integration/react'
+import { GestureHandlerRootView } from 'react-native-gesture-handler';
+
 
 function App(): React.JSX.Element {
   return (
-    <Provider store={store}>
-      <PersistGate persistor={persistor}>
-        <SafeAreaView style={styles.container}>
-          <StatusBar />
-          <AppNavigation />
-        </SafeAreaView>
-      </PersistGate>
-    </Provider>
-
+    <GestureHandlerRootView style={{ flex: 1 }}>
+      <Provider store={store}>
+        <PersistGate persistor={persistor}>
+          <SafeAreaView style={styles.container}>
+            <StatusBar />
+            <AppNavigation />
+          </SafeAreaView>
+        </PersistGate>
+      </Provider>
+    </GestureHandlerRootView>
   );
 }
 

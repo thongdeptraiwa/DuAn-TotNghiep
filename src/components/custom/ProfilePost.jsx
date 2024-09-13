@@ -1,6 +1,6 @@
 import { Image, StyleSheet, Text, TouchableOpacity, View } from 'react-native'
 import React, { useState } from 'react'
-import PostS from '../styles/PostS'
+import PostS from '../styles/custom/PostS'
 // npm install react-natnpm ruive-vector-icons
 import Icon from 'react-native-vector-icons/Ionicons'; // Hoặc một bộ icon khác
 const ProfilePost = (props) => {
