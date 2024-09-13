@@ -29,15 +29,15 @@ const Search = () => {
 
 
   const handleSearch = (query) => {
-    setSearchQuery(query); // Cập nhật giá trị searchQuery.
+    setSearchQuery(query); 
     if (query === '') {
       setFilteredProducts([]); 
     } else {
-      // Lọc danh sách Product để tìm các sản phẩm có tên chứa chuỗi tìm kiếm (không phân biệt chữ hoa chữ thường).
+
       const filtered = data.filter((a) =>
         a.displayName.toLowerCase().includes(query.toLowerCase())
       );
-      setFilteredProducts(filtered); // Cập nhật danh sách filteredProducts.
+      setFilteredProducts(filtered);
     }
   };
 
