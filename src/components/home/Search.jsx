@@ -8,7 +8,7 @@ import { getAllUsers } from '../../rtk/API';
 const Search = () => {
   const [data, setData] = useState([]);
   const [searchQuery, setSearchQuery] = useState(''); 
-  const [filteredProducts, setFilteredProducts] = useState([]); // Tạo state cho danh sách sản phẩm sau khi lọc.
+  const [filteredUser, setFilteredUser] = useState([]); 
 
   const dispatch = useDispatch();
   
@@ -31,13 +31,13 @@ const Search = () => {
   const handleSearch = (query) => {
     setSearchQuery(query); 
     if (query === '') {
-      setFilteredProducts([]); 
+      setFilteredUser([]); 
     } else {
 
       const filtered = data.filter((a) =>
         a.displayName.toLowerCase().includes(query.toLowerCase())
       );
-      setFilteredProducts(filtered);
+      setFilteredUser(filtered);
     }
   };
 
@@ -49,7 +49,7 @@ const Search = () => {
         onChangeText={handleSearch} // Update query state on text input
       />
       <FlatList
-        data={filteredProducts}
+        data={filteredUser}
         keyExtractor={(item) => item._id}
         renderItem={({ item }) => <SearchItem user={item} />} 
       />
