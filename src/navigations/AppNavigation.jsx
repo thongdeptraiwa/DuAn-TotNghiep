@@ -9,13 +9,6 @@ import UserNavigation from './UserNavigation';
 const AppNavigation = () => {
   const user = useSelector(state => state.app.user)
 
-  // const dispatch = useDispatch()
-
-  // useEffect(() => {
-  //   dispatch(listProducts());
-  //   return () => {
-  //   }
-  // }, [])
 
   return (
     <NavigationContainer>

@@ -1,4 +1,4 @@
-import { FlatList, Image, Pressable, ScrollView, StyleSheet, Text, View } from 'react-native'
+import { FlatList, Image, Pressable, ScrollView, StyleSheet, Text, TouchableOpacity, View } from 'react-native'
 import React, { useState, useEffect } from 'react'
 import HomeS from '../styles/home/HomeS';
 import Post from '../custom/items/Post';
@@ -51,54 +51,57 @@ const listPost = [
         image: "https://hoanghamobile.com/tin-tuc/wp-content/uploads/2023/12/dtcl-meta-tft-13-24-thumb.jpg"
     },
 ]
-const Home = (props) => {
-    const { navigation } = props;
+    const Home = (props) => {
+        const { navigation } = props;
 
-    //test Thong
-    const [users, setUsers] = useState([]);
-    const dispatch = useDispatch();
-    const getTest = async () => {
-        try {
-            const result = await dispatch(getAllUsers())
-            //console.log("===>", result);
-            setUsers(result.payload);
-        } catch (error) {
-            console.log(error)
+        //test Thong
+        const [users, setUsers] = useState([]);
+        const dispatch = useDispatch();
+        
+        const getTest = async () => {
+            try {
+                const result = await dispatch(getAllUsers())
+                //console.log("===>", result);
+                setUsers(result.payload);
+            } catch (error) {
+                console.log(error)
+            }
         }
-    }
-    useEffect(() => {
-        getTest();
-        //console.log(users);
-        return () => {
-        }
-    }, [users])
+        useEffect(() => {
+            getTest();
+            //console.log(users);
+            return () => {
+            }
+        }, [users])
 
-    return (
-        <View style={{ flex: 1, backgroundColor: "#f7f7f7" }}>
-            <View style={HomeS.container}>
-                <View style={HomeS.header}>
-                    <View>
-                        <Text style={HomeS.h1}>LinkUp</Text>
-                    </View>
-                    <View style={HomeS.row}>
-                        <Icon name="heart-outline" size={30} color="black" style={{ marginRight: 15 }} />
-                        <Icon name="add-circle-outline" size={30} color="black" style={{ marginRight: 15 }} />
-                        <Pressable onPress={() => navigation.navigate('Profile')}>
-                            <Image style={HomeS.avatar} source={{ uri: "https://img.freepik.com/free-psd/3d-illustration-human-avatar-profile_23-2150671142.jpg" }} />
-                        </Pressable>
+        return (
+            <View style={{ flex: 1, backgroundColor: "#f7f7f7" }}>
+                <View style={HomeS.container}>
+                    <View style={HomeS.header}>
+                        <View>
+                            <Text style={HomeS.h1}>Linkage</Text>
+                        </View>
+                        <View style={HomeS.row}>
+                            <Icon name="add-circle-outline" size={30} color="black" style={{ marginRight: 15 }} />
+                            <   TouchableOpacity onPress={()=> navigation.navigate('Search')}>
+                                <Icon name="search-outline" size={30} color="black" style={{ marginRight: 15 }} />
+                            </TouchableOpacity>
+                            <Pressable onPress={() => navigation.navigate('Profile')}>
+                                <Image style={HomeS.avatar} source={{ uri: "https://img.freepik.com/free-psd/3d-illustration-human-avatar-profile_23-2150671142.jpg" }} />
+                            </Pressable>
+                        </View>
                     </View>
                 </View>
+                <FlatList
+                    data={listPost}
+                    renderItem={({ item }) => <Post dataP={item} />}
+                    keyExtractor={(item) => item.id.toString()}
+                    showsVerticalScrollIndicator={false}
+                    contentContainerStyle={{ paddingBottom: 20 }} // Add padding to the bottom if needed
+                />
             </View>
-            <FlatList
-                data={listPost}
-                renderItem={({ item }) => <Post dataP={item} />}
-                keyExtractor={(item) => item.id.toString()}
-                showsVerticalScrollIndicator={false}
-                contentContainerStyle={{ paddingBottom: 20 }} // Add padding to the bottom if needed
-            />
-        </View>
-    )
-}
+        )
+    }
 
 
-export default Home
+    export default Home

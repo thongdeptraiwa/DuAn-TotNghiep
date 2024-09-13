@@ -7,7 +7,7 @@ import { resetToken } from '../rtk/Reducer';
 const AxiosHelper = (token = '', contentType = 'application/json') => {
     const axiosInstance = axios.create({
         //baseURL: 'https://nodejs-react2.onrender.com'//render
-        baseURL: 'https://duan-totnghiep.onrender.com/'////IP: mạng
+        baseURL: 'https://be-linkage.vercel.app/'////IP: mạng
     });
     // cmd -----> ipconfig -----> IPv4 Address (192.168.1.1)
     axiosInstance.interceptors.request.use(
@@ -30,10 +30,10 @@ const AxiosHelper = (token = '', contentType = 'application/json') => {
     }, async (error) => {
         const x = error?.config;
         if (error.response.status == 403 && !x?.sent) {
-            console.error("403");
+            //console.error("403, token hết hạn");
             x.sent = true;
             //gọi api refreshToken
-            await axios.post(`https://duan-totnghiep.onrender.com/user/refreshToken`, {
+            await axios.post(`https://be-linkage.vercel.app/user/refreshToken`, {
                 refreshToken: store.getState().app.refreshToken
             })
                 .then(async function (response) {

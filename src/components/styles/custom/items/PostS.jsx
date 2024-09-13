@@ -23,7 +23,7 @@ const PostS = StyleSheet.create({
     name: {
         fontSize: 15,
         fontWeight: 'bold',
-        color: 'gray'
+        color: 'black'
     },
     image: {
         width: 'auto',
