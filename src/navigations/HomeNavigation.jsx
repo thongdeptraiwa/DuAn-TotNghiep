@@ -1,7 +1,7 @@
 import React, { useEffect } from 'react'
-import Search from '../components/home/Search';
-import Home from '../components/home/Home';
-import Profile from '../components/user/Profile';
+import Search from '../components/screens/Search';
+import Home from '../components/screens/Home';
+import Profile from '../components/screens/Profile';
 
 import { createNativeStackNavigator } from '@react-navigation/native-stack';
 

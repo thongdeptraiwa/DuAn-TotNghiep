@@ -1,22 +1,22 @@
 import React, { useState, useEffect } from 'react';
 import { View, FlatList } from 'react-native';
-import { CustomTextInputSearch } from '../custom/textinputs/CustomTextInput';
-import SearchItem from '../custom/items/SearchItem';
+import { CustomTextInputSearch } from '../custom/CustomTextInput';
+import SearchItem from '../custom/SearchItem';
 import { useDispatch } from 'react-redux';
-import { getAllUsers } from '../../rtk/API'; 
+import { getAllUsers } from '../../rtk/API';
 
 const Search = () => {
   const [data, setData] = useState([]);
-  const [searchQuery, setSearchQuery] = useState(''); 
-  const [filteredUser, setFilteredUser] = useState([]); 
+  const [searchQuery, setSearchQuery] = useState('');
+  const [filteredProducts, setFilteredProducts] = useState([]); // Tạo state cho danh sách sản phẩm sau khi lọc.
 
   const dispatch = useDispatch();
-  
+
   const getData = async () => {
     try {
       const result = await dispatch(getAllUsers());
       if (result.payload && result.payload.users) {
-        setData(result.payload.users); 
+        setData(result.payload.users);
       }
     } catch (error) {
       console.log(error);
@@ -29,15 +29,15 @@ const Search = () => {
 
 
   const handleSearch = (query) => {
-    setSearchQuery(query); 
+    setSearchQuery(query);
     if (query === '') {
-      setFilteredUser([]); 
+      setFilteredProducts([]);
     } else {
 
       const filtered = data.filter((a) =>
         a.displayName.toLowerCase().includes(query.toLowerCase())
       );
-      setFilteredUser(filtered);
+      setFilteredProducts(filtered);
     }
   };
 
@@ -49,9 +49,9 @@ const Search = () => {
         onChangeText={handleSearch} // Update query state on text input
       />
       <FlatList
-        data={filteredUser}
+        data={filteredProducts}
         keyExtractor={(item) => item._id}
-        renderItem={({ item }) => <SearchItem user={item} />} 
+        renderItem={({ item }) => <SearchItem user={item} />}
       />
     </View>
   );

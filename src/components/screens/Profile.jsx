@@ -1,11 +1,12 @@
 import { ScrollView, Image, StyleSheet, Text, TouchableOpacity, View, ToastAndroid } from 'react-native'
 import React from 'react'
-import ProfileS from '../styles/user/ProfileS';
+import ProfileS from '../styles/screens/ProfileS';
 import Icon from 'react-native-vector-icons/Ionicons'; // Hoặc một bộ icon khác
-import ProfilePost from '../custom/items/ProfilePost';
+import ProfilePost from '../custom/ProfilePost';
 import { logout } from '../../rtk/Reducer';
 import { useDispatch } from 'react-redux';
-let date = new Date().toDateString()
+let date = new Date().toDateString();
+
 const listPostProfile = [
     {
         id: 1,
@@ -40,7 +41,7 @@ const Profile = (props) => {
     const onLogout = () => {
         dispatch(logout());
         ToastAndroid.show('Đã đăng xuất', ToastAndroid.SHORT)
-      };
+    };
     return (
         <ScrollView style={ProfileS.all}>
             <View style={ProfileS.superBox}>

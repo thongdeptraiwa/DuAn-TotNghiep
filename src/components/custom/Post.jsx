@@ -1,12 +1,12 @@
 import { Image, Text, TouchableOpacity, View } from 'react-native'
 import React, { useState } from 'react'
-import PostS from '../../styles/custom/items/PostS';
-import Icon from 'react-native-vector-icons/Ionicons'; 
+import PostS from '../styles/custom/items/PostS';
+import Icon from 'react-native-vector-icons/Ionicons';
 
 const Post = (props) => {
     const { dataP } = props
     const [like, setLike] = useState(false)
-   
+
     return (
         <View style={PostS.container}>
             <View style={PostS.h2}>

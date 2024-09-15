@@ -1,25 +1,25 @@
 import React, { useState } from 'react';
 import { Text, View, TouchableOpacity, Pressable, Alert, ToastAndroid } from 'react-native';
-import styles from '../styles/user/LoginS';
+import styles from '../styles/screens/LoginS';
 import Icon from 'react-native-vector-icons/Ionicons';
 
 import { login } from '../../rtk/API';
 import { useDispatch } from 'react-redux';
-import { CustomTextInputEmail, CustomTextInputPassword } from '../custom/textinputs/CustomTextInput';
+import { CustomTextInputEmail, CustomTextInputPassword } from '../custom/CustomTextInput';
 const Login = (props) => {
   const { navigation } = props;
   const dispatch = useDispatch();
   const [email, setEmail] = useState('')
   const [password, setPasword] = useState('')
-  
+
   const onLogin = () => {
-    const data = {email, password};
+    const data = { email, password };
     dispatch(login(data))
       .unwrap()
       .then((user) => {
         ToastAndroid.show('Đăng nhập thành công', ToastAndroid.SHORT)
       })
-      .catch((error) =>{
+      .catch((error) => {
         console.error(error);
         ToastAndroid.show('Email hoặc mật khẩu không chính xác', ToastAndroid.SHORT)
       })

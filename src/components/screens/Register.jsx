@@ -1,14 +1,15 @@
 import React, { useState } from 'react';
 import { Text, View, TouchableOpacity, Pressable, ToastAndroid } from 'react-native';
-import styles from '../styles/user/LoginS';
+import styles from '../styles/screens/LoginS';
 import Icon from 'react-native-vector-icons/Ionicons';
-import { CustomTextInputEmail, CustomTextInputPassword, CustomTextInputRePassword, CustomTextInputUserName } from '../custom/textinputs/CustomTextInput';
+import { CustomTextInputEmail, CustomTextInputPassword, CustomTextInputRePassword, CustomTextInputUserName } from '../custom/CustomTextInput';
 import { register } from '../../rtk/API';
 import { useDispatch } from 'react-redux';
+
 const Register = (props) => {
   const { navigation } = props;
   const dispatch = useDispatch();
-  
+
   const [displayName, setdisplayName] = useState('')
   const [email, setEmail] = useState('')
   const [password, setPassword] = useState('')
@@ -16,7 +17,7 @@ const Register = (props) => {
 
   const onRegister = () => {
     const userDataRegister = { displayName, email, password };
-    
+
     dispatch(register(userDataRegister))
       .unwrap()
       .then((response) => {
@@ -25,10 +26,10 @@ const Register = (props) => {
         navigation.navigate('Login');
       })
       .catch((error) => {
-        console.log('Error:', error); 
+        console.log('Error:', error);
       });
   };
-  
+
   return (
     <View style={styles.ViewAll}>
       <View style={styles.container}>
