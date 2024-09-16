@@ -1,9 +1,9 @@
 import { createSlice } from "@reduxjs/toolkit";
 import { login } from "./API";
 
-
 const initialState = {
-    products: [],
+    theme: true,// true: light - false: dark
+    language: true,// true: ENG - false: VN
     status: 'idle',
     user: null, // thông tin user đăng nhập
     messageLogin: null,
@@ -20,10 +20,17 @@ const appSlice = createSlice({
             state.token = action.payload;
             //console.log(state.token);
         },
-
         // Đăng xuất người dùng
         logout: (state) => {
             state.user = null;
+        },
+        setTheme: (state) => {
+            state.theme = !state.theme;
+            ///console.log(state.theme);
+        },
+        setLanguage: (state) => {
+            state.language = !state.language;
+            ///console.log(state.language);
         }
     },
 
@@ -34,6 +41,7 @@ const appSlice = createSlice({
             state.messageLogin = null;
             state.token = '';
             state.refreshToken = '';
+            state.theme = true;
         });
         builder.addCase(login.fulfilled, (state, action) => {
             console.log("...fulfilled login");
@@ -54,7 +62,7 @@ const appSlice = createSlice({
     }
 });
 
-export const { resetToken, logout } = appSlice.actions;
+export const { resetToken, logout, setTheme, setLanguage } = appSlice.actions;
 export default appSlice.reducer;
 
 

@@ -4,8 +4,11 @@ import ProfileS from '../styles/screens/ProfileS';
 import Icon from 'react-native-vector-icons/Ionicons'; // Hoặc một bộ icon khác
 import ProfilePost from '../custom/ProfilePost';
 import { logout } from '../../rtk/Reducer';
-import { useDispatch } from 'react-redux';
 let date = new Date().toDateString();
+
+// test Thong
+import { useDispatch, useSelector } from 'react-redux';
+import { setLanguage } from '../../rtk/Reducer';
 
 const listPostProfile = [
     {
@@ -36,30 +39,44 @@ const listPostProfile = [
 
 const Profile = (props) => {
     const { navigation } = props;
+    const user = useSelector(state => state.app.user);
+    const theme = useSelector(state => state.app.theme);
+    const language = useSelector(state => state.app.language);
     const dispatch = useDispatch();
 
     const onLogout = () => {
         dispatch(logout());
         ToastAndroid.show('Đã đăng xuất', ToastAndroid.SHORT)
     };
+    const onLanguage = () => {
+        dispatch(setLanguage());
+    };
+
     return (
-        <ScrollView style={ProfileS.all}>
+        <ScrollView style={[ProfileS.all, { backgroundColor: theme ? "#f7f7f7" : "#121212" }]}>
             <View style={ProfileS.superBox}>
+                {/* header */}
                 <View style={ProfileS.container}>
-                    <TouchableOpacity onPress={() => navigation.navigate('Home')}>
+                    <TouchableOpacity onPress={onLanguage}>
                         <Icon name="arrow-back-circle" size={30} color="black" />
                     </TouchableOpacity>
-                    <Text style={ProfileS.h1}>Profile</Text>
-                    <TouchableOpacity style={{ backgroundColor: '#f3a8ac', borderRadius: 90, padding: 5 }} onPress={onLogout}>
-                        <Icon name="log-out-outline" size={20} color="red" />
+
+                    <Text style={[ProfileS.h1, { color: theme ? "black" : "white" }]}>{language ? "Profile"
+                        : "Trang cá nhân"}</Text>
+
+                    <TouchableOpacity style={{ position: "absolute", right: 0 }} onPress={onLogout}>
+                        <Icon name="menu" size={30} color={theme ? "black" : "white"} />
                     </TouchableOpacity>
+
                 </View>
+
                 <View style={ProfileS.box}>
-                    <Image style={ProfileS.avata} source={{ uri: "https://img.freepik.com/free-psd/3d-illustration-human-avatar-profile_23-2150671142.jpg" }} />
-                    <Text style={ProfileS.name}>Trung Nguyen</Text>
-                    <Text style={ProfileS.country}>VietNam</Text>
+                    <Image style={ProfileS.avata} source={{ uri: user.avatar }} />
+                    <Text style={[ProfileS.name, { color: theme ? "black" : "white" }]}>{user.displayName}</Text>
+                    <Text style={[ProfileS.bio, { color: theme ? "black" : "white" }]}>{user.bio}</Text>
                 </View>
-                <View style={ProfileS.contact}>
+
+                {/* <View style={ProfileS.contact}>
                     <View style={ProfileS.row}>
                         <Icon name="mail-outline" size={20} color="gray" />
                         <Text style={ProfileS.h3}>trungyasuo020@gmail.com</Text>
@@ -73,7 +90,7 @@ const Profile = (props) => {
                     <Text style={ProfileS.bio}>
                         "Nothing !"
                     </Text>
-                </View>
+                </View> */}
 
                 {/* List of posts */}
                 {listPostProfile.map((item) => (
@@ -81,7 +98,7 @@ const Profile = (props) => {
                 ))}
 
             </View>
-        </ScrollView>
+        </ScrollView >
     )
 }
 

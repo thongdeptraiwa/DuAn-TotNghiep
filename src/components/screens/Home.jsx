@@ -4,7 +4,8 @@ import HomeS from '../styles/screens/HomeS';
 import Post from '../custom/Post';
 
 // test Thong
-import { useDispatch } from 'react-redux'
+import { useDispatch } from 'react-redux';
+import { setTheme } from '../../rtk/Reducer';
 
 import Icon from 'react-native-vector-icons/Ionicons'; // Hoặc một bộ icon khác
 import { getAllUsers } from '../../rtk/API';
@@ -58,6 +59,9 @@ const Home = (props) => {
     //test Thong
     const [users, setUsers] = useState([]);
     const dispatch = useDispatch();
+    const onTheme = () => {
+        dispatch(setTheme());
+    }
 
     const getTest = async () => {
         try {
@@ -75,16 +79,19 @@ const Home = (props) => {
         }
     }, [users])
 
+
     return (
         <View style={{ flex: 1, backgroundColor: "#f7f7f7" }}>
             <View style={HomeS.container}>
                 <View style={HomeS.header}>
                     <View>
-                        <Text style={HomeS.h1}>Linkage</Text>
+                        <TouchableOpacity onPress={onTheme}>
+                            <Text style={HomeS.h1}>Linkage</Text>
+                        </TouchableOpacity>
                     </View>
                     <View style={HomeS.row}>
                         <Icon name="add-circle-outline" size={30} color="black" style={{ marginRight: 15 }} />
-                        <   TouchableOpacity onPress={() => navigation.navigate('Search')}>
+                        <TouchableOpacity onPress={() => navigation.navigate('Search')}>
                             <Icon name="search-outline" size={30} color="black" style={{ marginRight: 15 }} />
                         </TouchableOpacity>
                         <Pressable onPress={() => navigation.navigate('Profile')}>
@@ -100,7 +107,7 @@ const Home = (props) => {
                 showsVerticalScrollIndicator={false}
                 contentContainerStyle={{ paddingBottom: 20 }} // Add padding to the bottom if needed
             />
-        </View>
+        </View >
     )
 }
 

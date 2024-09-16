@@ -13,12 +13,15 @@ const ProfileS = StyleSheet.create({
     },
     all: {
         flex: 1,
-        backgroundColor: "#f7f7f7",
+        ///backgroundColor: "#f7f7f7",
     },
     h1: {
+        width: "100%",
         fontSize: 25,
-        color: 'black',
-        fontWeight: 'bold'
+        //color: 'black',
+        fontWeight: 'bold',
+        textAlign: 'center',
+
     },
     avata: {
         width: 120,
@@ -32,10 +35,10 @@ const ProfileS = StyleSheet.create({
     name: {
         fontSize: 27,
         fontWeight: 'bold',
-        color: 'black',
+        //color: 'black',
         marginVertical: 10
     },
-    country: {
+    bio: {
         fontSize: 13,
         fontWeight: 'bold',
         color: 'gray'
@@ -43,24 +46,19 @@ const ProfileS = StyleSheet.create({
     contact: {
         marginTop: 15
     },
-    row:{
+    row: {
         marginTop: 5,
-        flexDirection:'row',
-        alignItems:'center'
+        flexDirection: 'row',
+        alignItems: 'center'
     },
-    h3:{
-        color:'gray',
+    h3: {
+        color: 'gray',
         marginLeft: 7
     },
-    content:{
-        marginTop:20,
-        alignItems:'center'
+    content: {
+        marginTop: 20,
+        alignItems: 'center'
     },
-    bio:{
-        color:'gray',
-        fontSize:15,
-        fontWeight:'bold'
-    }
 })
 
 export default ProfileS
