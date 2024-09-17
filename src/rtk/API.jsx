@@ -2,10 +2,10 @@ import { createAsyncThunk } from '@reduxjs/toolkit'
 import AxiosHelper from '../helpers/AxiosHelper'
 
 export const login = createAsyncThunk(
-  'user/login',
+  'user/loginApp',
   async (data, { rejectWithValue }) => {
     try {
-      const response = await AxiosHelper().post('user/login', data);
+      const response = await AxiosHelper().post('user/loginApp', data);
       //console.log(response)
       if (response.status == true) {
         return response;
@@ -13,7 +13,6 @@ export const login = createAsyncThunk(
         return rejectWithValue(response.data.message);
       }
     } catch (error) {
-      console.log("1")
       return rejectWithValue(error.message);
     }
   }
@@ -25,7 +24,7 @@ export const register = createAsyncThunk(
   'user/register',
   async (data, { rejectWithValue }) => {
     try {
-      const response = await AxiosHelper().post('user/add', data)
+      const response = await AxiosHelper().post('user/addUser', data)
       console.log(response)
       if (response.status == true) {
         return response.message;
