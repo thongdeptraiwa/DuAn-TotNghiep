@@ -4,7 +4,6 @@ import { login } from "./API";
 const initialState = {
     theme: true,// true: light - false: dark
     language: true,// true: ENG - false: VN
-    status: 'idle',
     user: null, // thông tin user đăng nhập
     messageLogin: null,
     token: '', // token
