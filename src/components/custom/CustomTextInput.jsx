@@ -72,8 +72,8 @@ export const CustomTextInputRePassword = ({ placeholder, onChangeText, value }) 
 
 export const CustomTextInputSearch = ({ placeholder, onChangeText, value, placeholderTextColor }) => {
   return (
-    <View style={{ flexDirection: 'row', alignItems: 'center', justifyContent: 'center', borderBottomColor: 'black', borderBottomWidth: 1, padding: 3 }}>
-      <Icon name="arrow-back-outline" size={30} color="black" style={{ marginRight: 5 }} />
+    <View style={{ flexDirection: 'row', alignItems: 'center', justifyContent: 'center' }}>
+      {/* <Icon name="arrow-back-outline" size={30} color="black" style={{ marginRight: 5 }} /> */}
       <TextInput
         placeholder={placeholder}
         value={value}

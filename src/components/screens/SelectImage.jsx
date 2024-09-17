@@ -7,15 +7,30 @@ import { launchCamera, launchImageLibrary } from 'react-native-image-picker';
 
 // test Thong
 import { useSelector } from 'react-redux';
+import Dialog from "react-native-dialog";
 
 const SelectImage = (props) => {
     const { navigation } = props
 
+    //img
+    const [image, setImage] = useState(null);
+
     // Thong 
     const theme = useSelector(state => state.app.theme);
     const language = useSelector(state => state.app.language);
+    //dialog đăng xuất
+    const [ShowDialog, setShowDialog] = useState(false);
+    const handle_huy = () => {
+        setShowDialog(false)
+    };
+    const handle_dong_y = () => {
+        setShowDialog(false);
+        setImage(null);
+        navigation.goBack();
+    };
 
-    const [image, setImage] = useState(null);
+
+
     // hàm chụp ảnh
     const onOpenCamera = async () => {
         try {
@@ -75,15 +90,20 @@ const SelectImage = (props) => {
         <View style={[{ height: "100%" }, { backgroundColor: theme ? "white" : "black" }]}>
             <View style={SelectImageS.box}>
                 <View style={SelectImageS.close}>
-                    <TouchableOpacity onPress={() => navigation.navigate("Home")}>
+                    <TouchableOpacity onPress={() => image ? setShowDialog(true) : navigation.goBack()}>
                         <Icon name="close" size={35} color={theme ? "black" : "white"} style={{ marginRight: 15 }} />
                     </TouchableOpacity>
                     <Text style={[SelectImageS.h1, { color: theme ? "black" : "white" }]}>{language ? "New post" : "Bài đăng mới"}</Text>
                 </View>
                 <View>
-                    <TouchableOpacity onPress={() => navigation.navigate("UpPost")}>
-                        <Text style={SelectImageS.h2}>{language ? "Next" : "Tiếp"}</Text>
-                    </TouchableOpacity>
+                    {
+                        image ? (
+                            <TouchableOpacity onPress={() => navigation.navigate("UpPost", { image: image })}>
+                                <Text style={SelectImageS.h2}>{language ? "Next" : "Tiếp"}</Text>
+                            </TouchableOpacity>
+                        ) : null
+                    }
+
                 </View>
             </View>
             {
@@ -100,7 +120,23 @@ const SelectImage = (props) => {
                     <Text style={[SelectImageS.h3, { color: theme ? "white" : "black" }]}>{language ? "Take a picture" : "Chụp ảnh"}</Text>
                 </TouchableOpacity>
             </View>
+
+            {/* Dialog  logout*/}
+            <Dialog.Container visible={ShowDialog}>
+                {/* title */}
+                <Dialog.Title>Thông báo</Dialog.Title>
+                {/* nội dung */}
+                <Dialog.Description>Bạn có chắc chắn thoát ?</Dialog.Description>
+                {/* btn hủy */}
+                <Dialog.Button label="Huỷ"
+                    onPress={() => handle_huy()} />
+                {/* btn đồng ý */}
+                <Dialog.Button label="Đồng ý"
+                    onPress={() => handle_dong_y()} />
+            </Dialog.Container>
+
         </View >
+
     )
 }
 

@@ -13,6 +13,7 @@ export const login = createAsyncThunk(
         return rejectWithValue(response.data.message);
       }
     } catch (error) {
+      console.log("1")
       return rejectWithValue(error.message);
     }
   }

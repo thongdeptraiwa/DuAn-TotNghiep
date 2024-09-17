@@ -7,16 +7,13 @@ import { useSelector } from 'react-redux';
 
 //tab tổng
 import Home from '../components/screens/Home';
-import Search from '../components/screens/Search';
 import Profile from '../components/screens/Profile';
-import SelectImage from '../components/screens/SelectImage';
-// test
-import Welcome from '../components/screens/Welcome';
+import Notification from '../components/screens/Notification';
+import FriendNotification from '../components/screens/FriendNotification';
 const oTab = {
   Home: { name: 'Home', component: Home },
-  Search: { name: 'Search', component: Search },
-  SelectImage: { name: 'SelectImage', component: SelectImage },
-  AddFriend: { name: 'AddFriend', component: Welcome },
+  FriendNotification: { name: 'FriendNotification', component: FriendNotification },
+  Notification: { name: 'Notification', component: Notification },
   Profile: { name: 'Profile', component: Profile },
 }
 const Tab = createBottomTabNavigator();
@@ -40,30 +37,19 @@ const TabHome = () => {
                 ? "white"
                 : "gray"
             )
-          } else if (route.name === 'Search') {
-            name = "search";
-            theme ? (
-              color = focused
-                ? "#121212"
-                : "gray"
-            ) : (
-              color = focused
-                ? "white"
-                : "gray"
-            )
-          } else if (route.name === 'SelectImage') {
-            name = "plus-square";
-            theme ? (
-              color = focused
-                ? "#121212"
-                : "gray"
-            ) : (
-              color = focused
-                ? "white"
-                : "gray"
-            )
-          } else if (route.name === 'AddFriend') {
+          } else if (route.name === 'FriendNotification') {
             name = "users";
+            theme ? (
+              color = focused
+                ? "#121212"
+                : "gray"
+            ) : (
+              color = focused
+                ? "white"
+                : "gray"
+            )
+          } else if (route.name === 'Notification') {
+            name = "bell-o";
             theme ? (
               color = focused
                 ? "#121212"
@@ -118,10 +104,14 @@ const TabHome = () => {
 }
 
 //stack home
+import SelectImage from '../components/screens/SelectImage';
 import UpPost from '../components/screens/UpPost';
+import Search from '../components/screens/Search';
 const oStackHome = {
   TabHome: { name: 'TabHome', component: TabHome },
+  SelectImage: { name: 'SelectImage', component: SelectImage },
   UpPost: { name: 'UpPost', component: UpPost },
+  Search: { name: 'Search', component: Search },
 }
 const StackHome = createNativeStackNavigator();
 const HomeNavigation = () => {

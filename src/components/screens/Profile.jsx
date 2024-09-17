@@ -9,6 +9,7 @@ let date = new Date().toDateString();
 // test Thong
 import { useDispatch, useSelector } from 'react-redux';
 import { setLanguage } from '../../rtk/Reducer';
+import { oStackHome } from '../../navigations/HomeNavigation';
 
 const listPostProfile = [
     {
@@ -58,16 +59,19 @@ const Profile = (props) => {
                 {/* header */}
                 <View style={ProfileS.container}>
                     <TouchableOpacity onPress={onLanguage}>
-                        <Icon name="arrow-back-circle" size={30} color="black" />
+                        <Icon name="arrow-back-circle" size={30} color={theme ? "black" : "white"} />
                     </TouchableOpacity>
 
                     <Text style={[ProfileS.h1, { color: theme ? "black" : "white" }]}>{language ? "Profile"
                         : "Trang cá nhân"}</Text>
 
+                    <TouchableOpacity style={{ position: "absolute", right: 40 }} onPress={() => navigation.navigate(oStackHome.SelectImage.name)}>
+                        <Icon name="add-circle-outline" size={30} color={theme ? "black" : "white"} />
+                    </TouchableOpacity>
+
                     <TouchableOpacity style={{ position: "absolute", right: 0 }} onPress={onLogout}>
                         <Icon name="menu" size={30} color={theme ? "black" : "white"} />
                     </TouchableOpacity>
-
                 </View>
 
                 <View style={ProfileS.box}>

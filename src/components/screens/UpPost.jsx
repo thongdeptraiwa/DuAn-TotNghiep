@@ -7,7 +7,9 @@ import Icon from 'react-native-vector-icons/Ionicons'; // Hoặc một bộ icon
 import { useSelector } from 'react-redux';
 
 const UpPost = (props) => {
-  const { navigation } = props
+  const { route, navigation } = props;
+  const { params } = route;
+  //console.log(params.image);
 
   // Thong 
   const user = useSelector(state => state.app.user);
@@ -65,7 +67,7 @@ const UpPost = (props) => {
             </View>
           </View>
           <View style={UpPostS.boxImage}>
-            <Image style={UpPostS.image} source={{ uri: "file:///data/user/0/com.react2thi/cache/rn_image_picker_lib_temp_3527c21a-30eb-456e-bc98-7747bdedab8b.jpg" }} />
+            <Image style={UpPostS.image} source={{ uri: params.image }} />
           </View>
           <TextInput placeholder={language ? "What are you thinking ?" : "Bạn đang nghĩ gì ?"}
             multiline={true} // Cho phép nhiều dòng

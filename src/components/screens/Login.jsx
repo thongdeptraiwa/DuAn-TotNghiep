@@ -16,7 +16,7 @@ const Login = (props) => {
     const data = { email, password };
     dispatch(login(data))
       .unwrap()
-      .then((user) => {
+      .then(() => {
         ToastAndroid.show('Đăng nhập thành công', ToastAndroid.SHORT)
       })
       .catch((error) => {

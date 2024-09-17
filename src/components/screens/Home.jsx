@@ -6,6 +6,7 @@ import Post from '../custom/Post';
 // test Thong
 import { useDispatch } from 'react-redux';
 import { setTheme } from '../../rtk/Reducer';
+import { oStackHome } from '../../navigations/HomeNavigation';
 
 import Icon from 'react-native-vector-icons/Ionicons'; // Hoặc một bộ icon khác
 import { getAllUsers } from '../../rtk/API';
@@ -90,13 +91,16 @@ const Home = (props) => {
                         </TouchableOpacity>
                     </View>
                     <View style={HomeS.row}>
-                        <Icon name="add-circle-outline" size={30} color="black" style={{ marginRight: 15 }} />
-                        <TouchableOpacity onPress={() => navigation.navigate('Search')}>
-                            <Icon name="search-outline" size={30} color="black" style={{ marginRight: 15 }} />
+                        <TouchableOpacity onPress={() => navigation.navigate(oStackHome.SelectImage.name)}>
+                            <Icon name="add-circle-outline" size={30} color="black" style={{ marginRight: 15 }} />
                         </TouchableOpacity>
-                        <Pressable onPress={() => navigation.navigate('Profile')}>
+
+                        <TouchableOpacity onPress={() => navigation.navigate(oStackHome.Search.name)}>
+                            <Icon name="search-outline" size={30} color="black" style={{ marginRight: 0 }} />
+                        </TouchableOpacity>
+                        {/* <Pressable onPress={() => navigation.navigate('Profile')}>
                             <Image style={HomeS.avatar} source={{ uri: "https://img.freepik.com/free-psd/3d-illustration-human-avatar-profile_23-2150671142.jpg" }} />
-                        </Pressable>
+                        </Pressable> */}
                     </View>
                 </View>
             </View>
