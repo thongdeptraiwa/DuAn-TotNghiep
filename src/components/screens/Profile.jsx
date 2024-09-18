@@ -62,8 +62,8 @@ const Profile = (props) => {
                         <Icon name="arrow-back-circle" size={30} color={theme ? "black" : "white"} />
                     </TouchableOpacity>
 
-                    <Text style={[ProfileS.h1, { color: theme ? "black" : "white" }]}>{language ? "Profile"
-                        : "Trang cá nhân"}</Text>
+                    <Text style={[ProfileS.h1, { color: theme ? "black" : "white" }]}>
+                        {language ? "Profile" : "Trang cá nhân"}</Text>
 
                     <TouchableOpacity style={{ position: "absolute", right: 40 }} onPress={() => navigation.navigate(oStackHome.SelectImage.name)}>
                         <Icon name="add-circle-outline" size={30} color={theme ? "black" : "white"} />
