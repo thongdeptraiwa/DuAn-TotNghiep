@@ -12,11 +12,11 @@ const ProfilePost = (props) => {
             <View style={PostS.h2}>
                 <View style={PostS.header}>
                     <View>
-                        <Image style={PostS.avata} source={{ uri: dataProfile.avata }} />
+                        <Image style={PostS.avata} source={{ uri: dataProfile.userId.avatar }} />
                     </View>
                     <View>
-                        <Text style={PostS.name}>{dataProfile.name}</Text>
-                        <Text style={PostS.fontDate}>{dataProfile.date}</Text>
+                        <Text style={PostS.name}>{dataProfile.userId.displayName}</Text>
+                        <Text style={PostS.fontDate}>{dataProfile.createdAt}</Text>
                     </View>
                 </View>
                 <View>
@@ -24,8 +24,8 @@ const ProfilePost = (props) => {
                 </View>
             </View>
             <View style={PostS.body}>
-                <Text style={PostS.title}>{dataProfile.title}</Text>
-                <Image style={PostS.image} source={{ uri: dataProfile.image }} />
+                <Text style={PostS.title}>{dataProfile.content}</Text>
+                <Image style={PostS.image} source={{ uri: dataProfile.images[0] }} />
             </View>
             <View style={PostS.interact}>
                 <TouchableOpacity onPress={() => { setLike(!like) }}>

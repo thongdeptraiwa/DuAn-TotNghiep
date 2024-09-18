@@ -37,12 +37,31 @@ export const register = createAsyncThunk(
   }
 )
 
+export const myPost = createAsyncThunk(
+  'post/getMyPosts',
+  async (data, { rejectWithValue }) => {
+    try {
+      const response = await AxiosHelper(data.token)
+        //.get('post/getMyPosts', data);
+        .get(`post/getMyPosts?userId=${data.userId}`);
+      //console.log(response)
+      if (response.status == true) {
+        return response;
+      } else {
+        return rejectWithValue(response.data.message);
+      }
+    } catch (error) {
+      return rejectWithValue(error.message);
+    }
+  }
+);
 
+/// test token
 export const getAllUsers = createAsyncThunk(
   'user/getAllUsers',
   async (data, { rejectWithValue }) => {
     try {
-      const response = await AxiosHelper()
+      const response = await AxiosHelper(data.token)
         .get('user/getAllUsers', data);
       //console.log(response)
       if (response.status == true) {
@@ -56,7 +75,23 @@ export const getAllUsers = createAsyncThunk(
   }
 );
 
-
+export const addPost = createAsyncThunk(
+  'post/addPost',
+  async (data, { rejectWithValue }) => {
+    try {
+      const response = await AxiosHelper()
+        .post('post/add', data);
+      //console.log(response)
+      if (response.status == true) {
+        return response;
+      } else {
+        return rejectWithValue(response.data.message);
+      }
+    } catch (error) {
+      return rejectWithValue(error.message);
+    }
+  }
+);
 
 
 

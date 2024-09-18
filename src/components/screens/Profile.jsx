@@ -1,5 +1,5 @@
 import { ScrollView, Image, StyleSheet, Text, TouchableOpacity, View, ToastAndroid } from 'react-native'
-import React from 'react'
+import React, { useEffect, useState } from 'react'
 import ProfileS from '../styles/screens/ProfileS';
 import Icon from 'react-native-vector-icons/Ionicons'; // Hoặc một bộ icon khác
 import ProfilePost from '../custom/ProfilePost';
@@ -10,40 +10,45 @@ let date = new Date().toDateString();
 import { useDispatch, useSelector } from 'react-redux';
 import { setLanguage } from '../../rtk/Reducer';
 import { oStackHome } from '../../navigations/HomeNavigation';
+import { myPost } from '../../rtk/API';
 
-const listPostProfile = [
-    {
-        id: 1,
-        name: "Trung Nguyen",
-        date: date,
-        avata: "https://img.freepik.com/free-psd/3d-illustration-human-avatar-profile_23-2150671142.jpg",
-        title: "Have a nice day",
-        image: "https://www.adorama.com/alc/wp-content/uploads/2017/11/shutterstock_114802408.jpg"
-    },
-    {
-        id: 2,
-        name: "Trung Nguyen",
-        date: date,
-        avata: "https://img.freepik.com/free-psd/3d-illustration-human-avatar-profile_23-2150671142.jpg",
-        title: "Bruh",
-        image: "https://www.didongmy.com/vnt_upload/news/05_2024/anh-27-meme-dang-yeu-didongmy.jpg"
-    },
-    {
-        id: 3,
-        name: "Trung Nguyen",
-        date: date,
-        avata: "https://img.freepik.com/free-psd/3d-illustration-human-avatar-profile_23-2150671142.jpg",
-        title: "OMG !!",
-        image: "https://hoanghamobile.com/tin-tuc/wp-content/uploads/2023/12/dtcl-meta-tft-13-24-thumb.jpg"
-    },
-]
+// const listPostProfile = [
+//     {
+//         id: 1,
+//         name: "Trung Nguyen",
+//         date: date,
+//         avata: "https://img.freepik.com/free-psd/3d-illustration-human-avatar-profile_23-2150671142.jpg",
+//         title: "Have a nice day",
+//         image: "https://www.adorama.com/alc/wp-content/uploads/2017/11/shutterstock_114802408.jpg"
+//     },
+//     {
+//         id: 2,
+//         name: "Trung Nguyen",
+//         date: date,
+//         avata: "https://img.freepik.com/free-psd/3d-illustration-human-avatar-profile_23-2150671142.jpg",
+//         title: "Bruh",
+//         image: "https://www.didongmy.com/vnt_upload/news/05_2024/anh-27-meme-dang-yeu-didongmy.jpg"
+//     },
+//     {
+//         id: 3,
+//         name: "Trung Nguyen",
+//         date: date,
+//         avata: "https://img.freepik.com/free-psd/3d-illustration-human-avatar-profile_23-2150671142.jpg",
+//         title: "OMG !!",
+//         image: "https://hoanghamobile.com/tin-tuc/wp-content/uploads/2023/12/dtcl-meta-tft-13-24-thumb.jpg"
+//     },
+// ]
 
 const Profile = (props) => {
     const { navigation } = props;
+
+    const dispatch = useDispatch();
     const user = useSelector(state => state.app.user);
+    const token = useSelector(state => state.app.token);
     const theme = useSelector(state => state.app.theme);
     const language = useSelector(state => state.app.language);
-    const dispatch = useDispatch();
+
+    const [posts, setPosts] = useState([]);
 
     const onLogout = () => {
         dispatch(logout());
@@ -52,6 +57,30 @@ const Profile = (props) => {
     const onLanguage = () => {
         dispatch(setLanguage());
     };
+
+
+    //chạy lại sau mỗi lần render
+    const onMyPost = async () => {
+        try {
+            await dispatch(myPost({ userId: user._id, token: token }))
+                .unwrap()
+                .then((response) => {
+                    ///console.log(response);
+                    setPosts(response.posts);
+                })
+                .catch((error) => {
+                    console.log('Error:', error);
+                });
+
+        } catch (error) {
+            console.log(error)
+        }
+    }
+    useEffect(() => {
+        onMyPost();
+        return () => {
+        }
+    })
 
     return (
         <ScrollView style={[ProfileS.all, { backgroundColor: theme ? "#f7f7f7" : "#121212" }]}>
@@ -97,8 +126,8 @@ const Profile = (props) => {
                 </View> */}
 
                 {/* List of posts */}
-                {listPostProfile.map((item) => (
-                    <ProfilePost key={item.id} dataProfile={item} />
+                {posts.map((item) => (
+                    <ProfilePost key={item._id} dataProfile={item} />
                 ))}
 
             </View>

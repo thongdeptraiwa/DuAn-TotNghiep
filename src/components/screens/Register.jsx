@@ -22,7 +22,6 @@ const Register = (props) => {
       .unwrap()
       .then((response) => {
         ToastAndroid.show('Đăng ký thành công', ToastAndroid.SHORT)
-
         navigation.navigate('Login');
       })
       .catch((error) => {

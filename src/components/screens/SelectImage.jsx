@@ -18,7 +18,7 @@ const SelectImage = (props) => {
     // Thong 
     const theme = useSelector(state => state.app.theme);
     const language = useSelector(state => state.app.language);
-    //dialog đăng xuất
+    //dialog 
     const [ShowDialog, setShowDialog] = useState(false);
     const handle_huy = () => {
         setShowDialog(false)
@@ -48,8 +48,8 @@ const SelectImage = (props) => {
                     console.log('ImagePicker Error: ', response.errorMessage);
                 }
                 else {
-                    console.log('response -> ', response);
-                    setImage(response.assets[0].uri);
+                    //console.log('response -> ', response);
+                    setImage(response.assets[0]);
                     // upload
                     // await uploadImage(response.assets[0]);
                 }
@@ -76,10 +76,10 @@ const SelectImage = (props) => {
                     console.log('ImagePicker Error: ', response.errorMessage);
                 }
                 else {
-                    console.log('response -> ', response);
-                    setImage(response.assets[0].uri);
+                    //console.log('response -> ', response);
+                    setImage(response.assets[0]);
                     // upload
-                    await uploadImage(response.assets[0]);
+                    ///await uploadImage(response.assets[0]);
                 }
             });
         } catch (error) {
@@ -108,7 +108,7 @@ const SelectImage = (props) => {
             </View>
             {
                 image ? <Image
-                    source={{ uri: image }}
+                    source={{ uri: image.uri }}
                     style={SelectImageS.image} /> :
                     <View style={SelectImageS.boxImage}></View>
             }

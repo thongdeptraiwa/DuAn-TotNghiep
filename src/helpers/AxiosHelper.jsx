@@ -6,8 +6,8 @@ import { resetToken } from '../rtk/Reducer';
 
 const AxiosHelper = (token = '', contentType = 'application/json') => {
     const axiosInstance = axios.create({
-        //baseURL: 'https://nodejs-react2.onrender.com'//render
-        baseURL: 'https://be-linkage.vercel.app/'////IP: mạng
+        //baseURL: 'http://localhost:3000/'// IP: mạng
+        baseURL: 'https://be-linkage.vercel.app/'// deploy
     });
     // cmd -----> ipconfig -----> IPv4 Address (192.168.1.1)
     axiosInstance.interceptors.request.use(
@@ -37,7 +37,7 @@ const AxiosHelper = (token = '', contentType = 'application/json') => {
                 refreshToken: store.getState().app.refreshToken
             })
                 .then(async function (response) {
-                    console.log("=>token1: " + response.data?.token);
+                    //console.log("=>token1: " + response.data?.token);
                     await store.dispatch(resetToken(response.data?.token));
                     x.headers['Authorization'] = `Bearer ${response.data?.token}`;
                 })

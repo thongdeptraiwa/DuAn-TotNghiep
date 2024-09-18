@@ -64,21 +64,22 @@ const Home = (props) => {
         dispatch(setTheme());
     }
 
-    const getTest = async () => {
-        try {
-            const result = await dispatch(getAllUsers())
-            //console.log("===>", result);
-            setUsers(result.payload);
-        } catch (error) {
-            console.log(error)
-        }
-    }
-    useEffect(() => {
-        getTest();
-        //console.log(users);
-        return () => {
-        }
-    }, [users])
+    // const getTest = async () => {
+    //     try {
+    //         const result = await dispatch(getAllUsers())
+    //         //console.log("===>", result);
+    //         setUsers(result.payload);
+    //         console.log(result.payload);
+    //     } catch (error) {
+    //         console.log(error)
+    //     }
+    // }
+    // useEffect(() => {
+    //     getTest();
+    //     //console.log(users);
+    //     return () => {
+    //     }
+    // }, [users])
 
 
     return (
