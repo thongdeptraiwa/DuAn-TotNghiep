@@ -98,7 +98,7 @@ const Profile = (props) => {
                         <Icon name="add-circle-outline" size={30} color={theme ? "black" : "white"} />
                     </TouchableOpacity>
 
-                    <TouchableOpacity style={{ position: "absolute", right: 0 }} onPress={onLogout}>
+                    <TouchableOpacity style={{ position: "absolute", right: 0 }} onPress={()=> navigation.navigate("Setting")}>
                         <Icon name="menu" size={30} color={theme ? "black" : "white"} />
                     </TouchableOpacity>
                 </View>

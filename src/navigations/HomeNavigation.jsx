@@ -107,11 +107,13 @@ const TabHome = () => {
 import SelectImage from '../components/screens/SelectImage';
 import UpPost from '../components/screens/UpPost';
 import Search from '../components/screens/Search';
+import Setting from '../components/screens/Setting';
 const oStackHome = {
   TabHome: { name: 'TabHome', component: TabHome },
   SelectImage: { name: 'SelectImage', component: SelectImage },
   UpPost: { name: 'UpPost', component: UpPost },
   Search: { name: 'Search', component: Search },
+  Setting: {name: 'Setting', component: Setting}
 }
 const StackHome = createNativeStackNavigator();
 const HomeNavigation = () => {
