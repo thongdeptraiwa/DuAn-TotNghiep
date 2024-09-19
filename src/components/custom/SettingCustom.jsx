@@ -5,10 +5,8 @@ import { useDispatch } from 'react-redux';
 import { View, Text, Pressable, ToastAndroid, Switch, Image, Alert } from 'react-native';
 import Icon from 'react-native-vector-icons/Ionicons';
 
-
-
+ 
 export const CustomAccountCentre = () => {
-    //save-outline
     return(
       <Pressable>
       <View style={MenuSettingS.section}> 
@@ -20,7 +18,6 @@ export const CustomAccountCentre = () => {
   };
 
 export const CustomSaved = () => {
-  //save-outline
   return(
     <Pressable>
     <View style={MenuSettingS.section}> 
@@ -32,7 +29,7 @@ export const CustomSaved = () => {
 };
 
 export const CustomComments = () => {
-    //save-outline
+   
     return(
       <Pressable>
       <View style={MenuSettingS.section}> 
@@ -74,7 +71,6 @@ export const CustomTheme = () => {
             }
 
     return (
-       
             <View style={MenuSettingS.section}>
                 <Icon name={switchValue ? "moon" : "sunny-outline"} size={30} style={MenuSettingS.icon} />
                 <Pressable onPress={onTheme}>
@@ -102,6 +98,7 @@ export const CustomBin = () => {
        </Pressable>
     )
    };
+
 export const CustomMoreSetting = () => {
     return(
        <Pressable>
