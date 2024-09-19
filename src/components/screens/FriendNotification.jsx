@@ -4,7 +4,6 @@ import FriendRequestItem from '../custom/FriendRequestItem';
 import Icon from 'react-native-vector-icons/FontAwesome';
 import { useSelector } from 'react-redux';
 import styles from '../styles/screens/FriendNoti';
-import LinearGradient from 'react-native-linear-gradient';
 
 
 const avt1 = 'https://upload.wikimedia.org/wikipedia/commons/thumb/3/3a/Cat03.jpg/640px-Cat03.jpg'
@@ -47,13 +46,13 @@ const FriendNotification = (props) => {
                 />
             </View>
             <View style={styles.goiYWrap}>
-                <Text style={[styles.goiY, {color: theme ? 'black' : 'white'}, {backgroundColor: theme ? '#e2e5ec' : '#393d3e'}]}> {language ? "Suggestions" : "Gợi ý"} </Text>
-                <Text style={[styles.goiY, {color: theme ? 'black' : 'white'}, {backgroundColor: theme ? '#e2e5ec' : '#393d3e'}]}> {language ? "Your friends" : "Bạn bè"}</Text>
+                <Text style={[styles.goiY, { color: theme ? 'black' : 'white' }, { backgroundColor: theme ? '#e2e5ec' : '#393d3e' }]}> {language ? "Suggestions" : "Gợi ý"} </Text>
+                <Text style={[styles.goiY, { color: theme ? 'black' : 'white' }, { backgroundColor: theme ? '#e2e5ec' : '#393d3e' }]}> {language ? "Your friends" : "Bạn bè"}</Text>
             </View>
 
             <View style={styles.titleWrap}>
-                <Text style={[styles.title2, {color: theme ? 'black' : 'white'}]}> {language ? "Friend requests" : "Lời mời kết bạn"} </Text>
-                <Text style={[styles.seeAll, ]}> {language ? "See all" : "Xem tất cả"} </Text>
+                <Text style={[styles.title2, { color: theme ? 'black' : 'white' }]}> {language ? "Friend requests" : "Lời mời kết bạn"} </Text>
+                <Text style={[styles.seeAll,]}> {language ? "See all" : "Xem tất cả"} </Text>
             </View>
 
             <FlatList
