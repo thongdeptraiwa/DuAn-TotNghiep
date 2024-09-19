@@ -1,121 +1,159 @@
 import React, { useState } from 'react';
 import MenuSettingS from '../styles/custom/items/MenuSetting';
-import { logout, setTheme } from '../../rtk/Reducer';
-import { useDispatch } from 'react-redux';
+import { logout, setTheme, setLanguage } from '../../rtk/Reducer';
+import { useDispatch, useSelector } from 'react-redux';
 import { View, Text, Pressable, ToastAndroid, Switch, Image, Alert } from 'react-native';
 import Icon from 'react-native-vector-icons/Ionicons';
 
 
-
 export const CustomAccountCentre = () => {
+    const theme = useSelector(state => state.app.theme);
+    const language = useSelector(state => state.app.language);
     //save-outline
-    return(
-      <Pressable>
-      <View style={MenuSettingS.section}> 
-      <Icon name="people-circle-outline" size={30} style={MenuSettingS.icon} />
-              <Text style={MenuSettingS.textSection}>Account Centre </Text>
-      </View>
-      </Pressable>
-   )
-  };
+    return (
+        <Pressable>
+            <View style={MenuSettingS.section}>
+                <Icon name="people-circle-outline" size={30} color={theme ? "black" : "white"} style={MenuSettingS.icon} />
+                <Text style={[MenuSettingS.textSection, { color: theme ? "black" : "white" }]}>{language ? "Account Centre" : "Trung tâm tài khoản"}</Text>
+            </View>
+        </Pressable>
+    )
+};
 
 export const CustomSaved = () => {
-  //save-outline
-  return(
-    <Pressable>
-    <View style={MenuSettingS.section}> 
-    <Icon name="bookmark-outline" size={30} style={MenuSettingS.icon} />
-            <Text style={MenuSettingS.textSection}>Saved </Text>
-    </View>
-    </Pressable>
- )
+    const theme = useSelector(state => state.app.theme);
+    const language = useSelector(state => state.app.language);
+    //save-outline
+    return (
+        <Pressable>
+            <View style={MenuSettingS.section}>
+                <Icon name="bookmark-outline" size={30} color={theme ? "black" : "white"} style={MenuSettingS.icon} />
+                <Text style={[MenuSettingS.textSection, { color: theme ? "black" : "white" }]}>{language ? "Saved" : "Lưu"}</Text>
+            </View>
+        </Pressable>
+    )
 };
 
 export const CustomComments = () => {
+    const theme = useSelector(state => state.app.theme);
+    const language = useSelector(state => state.app.language);
     //save-outline
-    return(
-      <Pressable>
-      <View style={MenuSettingS.section}> 
-      <Icon name="chatbubble-outline" size={30} style={MenuSettingS.icon} />
-              <Text style={MenuSettingS.textSection}>Comments </Text>
-      </View>
-      </Pressable>
-   )
-  };
+    return (
+        <Pressable>
+            <View style={MenuSettingS.section}>
+                <Icon name="chatbubble-outline" size={30} color={theme ? "black" : "white"} style={MenuSettingS.icon} />
+                <Text style={[MenuSettingS.textSection, { color: theme ? "black" : "white" }]}>{language ? "Comments" : "Bình luận"}</Text>
+            </View>
+        </Pressable>
+    )
+};
 
 export const CustomTab = () => {
-    return(
+    const theme = useSelector(state => state.app.theme);
+    const language = useSelector(state => state.app.language);
+    return (
         <Pressable>
-        <View style={MenuSettingS.section}> 
-        <Icon name="pricetag-outline" size={30} style={MenuSettingS.icon} />
-                <Text style={MenuSettingS.textSection}>Tabs and mentions </Text>
-        </View>
+            <View style={MenuSettingS.section}>
+                <Icon name="pricetag-outline" size={30} color={theme ? "black" : "white"} style={MenuSettingS.icon} />
+                <Text style={[MenuSettingS.textSection, { color: theme ? "black" : "white" }]}>{language ? "Tabs and mentions" : "Tab và đề cập"}</Text>
+            </View>
         </Pressable>
-     )
+    )
 };
 
 export const CustomLanguage = () => {
- return(
-    <Pressable>
-    <View style={MenuSettingS.section}> 
-    <Icon name="globe-outline" size={30} style={MenuSettingS.icon} />
-            <Text style={MenuSettingS.textSection}>Language</Text>
-    </View>
-    </Pressable>
- )
+    const [switchValue, setSwitchValue] = useState(false);
+    const dispatch = useDispatch();
+    const theme = useSelector(state => state.app.theme);
+    const language = useSelector(state => state.app.language);
+
+    const onLanguage = () => {
+        dispatch(setLanguage());
+        setSwitchValue(prevValue => !prevValue);
+    }
+    return (
+        <Pressable>
+            <View style={MenuSettingS.section}>
+                <Icon name="globe-outline" size={30} color={theme ? "black" : "white"} style={MenuSettingS.icon} />
+                <Text style={[MenuSettingS.textSection,
+                { color: theme ? "black" : "white" }]}>
+                    {language ? "Language: ENG " : "Ngôn ngữ: VN "}
+                </Text>
+                <Pressable onPress={onLanguage}>
+                    <Switch
+                        trackColor={{ false: "#eee", true: "#333" }}
+                        thumbColor={switchValue ? "#fff" : "#000"}
+                        ios_backgroundColor="#eee"// Màu nền của Switch trên iOS khi ở trạng thái tắt
+                        onValueChange={onLanguage}
+                        value={switchValue}
+                    />
+                </Pressable>
+            </View>
+        </Pressable>
+    )
 };
 
 export const CustomTheme = () => {
     const [switchValue, setSwitchValue] = useState(false);
     const dispatch = useDispatch();
+    const theme = useSelector(state => state.app.theme);
+    const language = useSelector(state => state.app.language);
+
     const onTheme = () => {
-         dispatch(setTheme());
-         setSwitchValue(prevValue => !prevValue);
-            }
+        dispatch(setTheme());
+        setSwitchValue(prevValue => !prevValue);
+    }
 
     return (
-       
-            <View style={MenuSettingS.section}>
-                <Icon name={switchValue ? "moon" : "sunny-outline"} size={30} style={MenuSettingS.icon} />
-                <Pressable onPress={onTheme}>
+
+        <View style={MenuSettingS.section}>
+            <Icon name={switchValue ? "moon" : "sunny-outline"} size={30} color={theme ? "black" : "white"} style={MenuSettingS.icon} />
+            <Text style={[MenuSettingS.textSection, { color: theme ? "black" : "white" }]}>{language ? "Theme" : "Chế độ"} </Text>
+            <Pressable onPress={onTheme}>
                 <Switch
-                    trackColor={{ false: "#eee", true: "#333" }} 
-                    thumbColor={switchValue ? "#fff" : "#000"} 
+                    trackColor={{ false: "#eee", true: "#333" }}
+                    thumbColor={switchValue ? "#fff" : "#000"}
                     ios_backgroundColor="#eee"// Màu nền của Switch trên iOS khi ở trạng thái tắt
                     onValueChange={onTheme}
                     value={switchValue}
                 />
-                </Pressable>
-            </View>
+            </Pressable>
+        </View>
     );
 };
 
 
 
 export const CustomBin = () => {
-    return(
-       <Pressable>
-       <View style={MenuSettingS.section}> 
-       <Icon name="trash-bin-outline" size={30} style={MenuSettingS.icon} />
-               <Text style={MenuSettingS.textSection}>Bin</Text>
-       </View>
-       </Pressable>
+    const theme = useSelector(state => state.app.theme);
+    const language = useSelector(state => state.app.language);
+    return (
+        <Pressable>
+            <View style={MenuSettingS.section}>
+                <Icon name="trash-bin-outline" size={30} color={theme ? "black" : "white"} style={MenuSettingS.icon} />
+                <Text style={[MenuSettingS.textSection, { color: theme ? "black" : "white" }]}>{language ? "Bin" : "Thùng rác"}</Text>
+            </View>
+        </Pressable>
     )
-   };
+};
 export const CustomMoreSetting = () => {
-    return(
-       <Pressable>
-       <View style={MenuSettingS.section}> 
-       <Icon name="settings-outline" size={30} style={MenuSettingS.icon} />
-               <Text style={MenuSettingS.textSection}>More Setting</Text>
-       </View>
-       </Pressable>
+    const theme = useSelector(state => state.app.theme);
+    const language = useSelector(state => state.app.language);
+    return (
+        <Pressable>
+            <View style={MenuSettingS.section}>
+                <Icon name="settings-outline" size={30} color={theme ? "black" : "white"} style={MenuSettingS.icon} />
+                <Text style={[MenuSettingS.textSection, { color: theme ? "black" : "white" }]}>{language ? "More Setting" : "Cài đặt thêm"}</Text>
+            </View>
+        </Pressable>
     )
-   };
+};
 
 
 export const CustomLogout = () => {
     const dispatch = useDispatch();
+    const theme = useSelector(state => state.app.theme);
+    const language = useSelector(state => state.app.language);
 
     const onLogout = () => {
         Alert.alert(
@@ -127,8 +165,8 @@ export const CustomLogout = () => {
                     onPress: () => console.log("Đã hủy"),
                     style: "cancel"
                 },
-                { 
-                    text: "Đăng xuất", 
+                {
+                    text: "Đăng xuất",
                     onPress: () => {
                         dispatch(logout());
                         ToastAndroid.show('Đã đăng xuất', ToastAndroid.SHORT);
@@ -139,11 +177,11 @@ export const CustomLogout = () => {
         );
     };
 
-    return(
+    return (
         <Pressable onPress={onLogout}>
             <View style={MenuSettingS.section}>
                 <Icon name="log-out-outline" size={30} style={MenuSettingS.icon} color="#FF0000" />
-                <Text style={MenuSettingS.textSection}>Logout</Text>
+                <Text style={[MenuSettingS.textSection, { color: theme ? "black" : "white" }]}>{language ? "Logout" : "Đăng xuất"}</Text>
             </View>
         </Pressable>
     );

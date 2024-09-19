@@ -16,20 +16,20 @@ const Search = (props) => {
 
   const dispatch = useDispatch();
 
-  const getData = async () => {
-    try {
-      const result = await dispatch(getAllUsers());
-      if (result.payload && result.payload.users) {
-        setData(result.payload.users);
-      }
-    } catch (error) {
-      console.log(error);
-    }
-  };
+  // const getData = async () => {
+  //   try {
+  //     const result = await dispatch(getAllUsers());
+  //     if (result.payload && result.payload.users) {
+  //       setData(result.payload.users);
+  //     }
+  //   } catch (error) {
+  //     console.log(error);
+  //   }
+  // };
 
-  useEffect(() => {
-    getData();
-  }, []);
+  // useEffect(() => {
+  //   getData();
+  // }, []);
 
 
   const handleSearch = (query) => {

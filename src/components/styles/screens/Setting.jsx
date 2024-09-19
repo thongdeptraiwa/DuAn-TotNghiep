@@ -8,19 +8,19 @@ const SettingS = StyleSheet.create({
     },
     icon: {
         marginRight: 10,
-        color: colors.blackFont,
+        //color: colors.blackFont,
     },
-    header:{
+    header: {
         margin: 10,
         alignItems: 'center',
-       flexDirection: 'row'
+        flexDirection: 'row'
     },
-    headerText:{
+    headerText: {
         fontWeight: 'bold',
         fontSize: 20,
-        color: 'black'
+        //color: 'black'
     }
-    
+
 })
 
 export default SettingS
