@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import MenuSettingS from '../styles/custom/items/MenuSetting';
 import { logout, setTheme, setLanguage } from '../../rtk/Reducer';
 import { useDispatch, useSelector } from 'react-redux';
@@ -120,26 +120,32 @@ export const CustomLanguage = () => {
         </Pressable>
     );
 };
-
 export const CustomTheme = () => {
     const [switchValue, setSwitchValue] = useState(false);
     const dispatch = useDispatch();
-    const theme = useSelector(state => state.app.theme);
+    const theme = useSelector(state => state.app.theme); // true = dark, false = light
     const language = useSelector(state => state.app.language);
 
     // Shared value để lưu trữ vị trí của icon trong thanh Switch
     const translateX = useSharedValue(0);
 
-    const onThemeChange = () => {
-        dispatch(setTheme());
-        setSwitchValue(prevValue => !prevValue);
+    // Khi component render, đồng bộ giá trị switchValue và translateX với theme
+    useEffect(() => {
+        setSwitchValue(theme); // Đồng bộ switch với theme
+        translateX.value = theme ? withTiming(35) : withTiming(0); // Đồng bộ vị trí icon
+    }, [theme]);
 
-        // Thay đổi giá trị translateX dựa trên switchValue
+    const onThemeChange = () => {
+        dispatch(setTheme()); // Thay đổi theme trong Redux
+        setSwitchValue(prevValue => !prevValue); // Cập nhật giá trị switch
+
+        // Cập nhật vị trí translateX dựa trên switchValue hiện tại
         translateX.value = switchValue ? withTiming(0) : withTiming(35); // Chuyển đổi vị trí
     };
 
     // Sử dụng Animated Style cho icon
     const animatedStyle = useAnimatedStyle(() => {
+        'worklet';
         return {
             transform: [{ translateX: translateX.value }]
         };

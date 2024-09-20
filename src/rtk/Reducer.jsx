@@ -1,5 +1,6 @@
 import { createSlice } from "@reduxjs/toolkit";
 import { login } from "./API";
+import AsyncStorage from "@react-native-async-storage/async-storage";
 
 const initialState = {
     theme: true,// true: light - false: dark
@@ -26,6 +27,7 @@ const appSlice = createSlice({
         setTheme: (state) => {
             state.theme = !state.theme;
             ///console.log(state.theme);
+            
         },
         setLanguage: (state) => {
             state.language = !state.language;

@@ -13,7 +13,7 @@ import { PersistGate } from 'redux-persist/integration/react'
 function App(): React.JSX.Element {
   return (
     <Provider store={store}>
-      <PersistGate persistor={persistor}>
+      <PersistGate loading={null} persistor={persistor}>
         <SafeAreaView style={styles.container}>
           <StatusBar />
           <AppNavigation />

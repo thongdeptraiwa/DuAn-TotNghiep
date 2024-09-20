@@ -8,7 +8,6 @@ const SettingS = StyleSheet.create({
     },
     icon: {
         marginRight: 10,
-        color: colors.blackFont,
     },
     header:{
         margin: 10,

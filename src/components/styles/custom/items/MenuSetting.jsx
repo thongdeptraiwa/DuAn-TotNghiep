@@ -7,11 +7,9 @@ const MenuSettingS = StyleSheet.create({
         alignItems: 'center'
     },
     icon: {
-        color: colors.blackFont,
         marginRight: 10,
     },
     textSection:{
-        color: colors.blackFont,
         fontSize: 15,
     }
     
