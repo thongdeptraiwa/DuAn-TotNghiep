@@ -5,7 +5,6 @@ const PostS = StyleSheet.create({
         marginBottom: 30,
         borderRadius: 5,
         padding: 10,
-        backgroundColor: '#fff', // Màu nền cần thiết cho hiệu ứng đổ bóng
     },
     header: {
         flexDirection: "row",

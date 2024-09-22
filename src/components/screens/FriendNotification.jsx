@@ -2,7 +2,11 @@ import React from 'react';
 import { View, FlatList, StyleSheet, Text } from 'react-native';
 import FriendRequestItem from '../custom/FriendRequestItem';
 import Icon from 'react-native-vector-icons/FontAwesome';
-
+import { useSelector } from 'react-redux';
+import styles from '../styles/screens/FriendNoti.jsx';
+import { ThemeContext } from '../../assets/context/ThemeContext';
+import { useContext } from 'react';
+import colors from '../../assets/colors';
 const avt1 = 'https://upload.wikimedia.org/wikipedia/commons/thumb/3/3a/Cat03.jpg/640px-Cat03.jpg'
 const avt2 = 'https://i.natgeofe.com/n/548467d8-c5f1-4551-9f58-6817a8d2c45e/NationalGeographic_2572187_3x4.jpg'
 const avt3 = 'https://static.scientificamerican.com/sciam/cache/file/2AE14CDD-1265-470C-9B15F49024186C10_source.jpg?w=600'
@@ -25,29 +29,32 @@ const friendRequests = [
     { id: 9, name: 'Anh Tuấn', mutualFriends: 5, profilePicture: avt9, sentTime: '1 năm' },
 ];
 
-// test Thong
-import { useSelector } from 'react-redux';
 
 const FriendNotification = (props) => {
 
-    const { navigation } = props;
-    const theme = useSelector(state => state.app.theme);
+    const {theme} = useContext(ThemeContext)
+    const activeColors = colors[theme.mode]
     const language = useSelector(state => state.app.language);
 
     return (
-        <View style={[styles.container, { backgroundColor: theme ? "white" : "#242827" }]}>
+        <View style={[styles.container, { backgroundColor: activeColors.tertiary }]}>
             <View style={styles.HeaderWrap}>
-                <Text style={styles.title}>{language ? "Friends" : "Bạn bè"}</Text>
-                <Icon style={styles.findButton} name="search" size={25} color={'white'} />
+                <Text style={[styles.title, { color: theme ? 'black' : 'white' }]}>  {language ? "Friends" : "Bạn bè"} </Text>
+                <Icon
+                    style={styles.findButton}
+                    name="search"
+                    size={25}
+                    color={theme ? 'black' : "white"}
+                />
             </View>
             <View style={styles.goiYWrap}>
-                <Text style={styles.goiY}>Gợi ý</Text>
-                <Text style={styles.goiY}>Bạn bè</Text>
+                <Text style={[styles.goiY, { color: theme ? 'black' : 'white' }, { backgroundColor: theme ? '#e2e5ec' : '#393d3e' }]}> {language ? "Suggestions" : "Gợi ý"} </Text>
+                <Text style={[styles.goiY, { color: theme ? 'black' : 'white' }, { backgroundColor: theme ? '#e2e5ec' : '#393d3e' }]}> {language ? "Your friends" : "Bạn bè"}</Text>
             </View>
 
             <View style={styles.titleWrap}>
-                <Text style={styles.title2}>Lời mời kết bạn</Text>
-                <Text style={styles.seeAll}>Xem tất cả</Text>
+                <Text style={[styles.title2, { color: theme ? 'black' : 'white' }]}> {language ? "Friend requests" : "Lời mời kết bạn"} </Text>
+                <Text style={[styles.seeAll,]}> {language ? "See all" : "Xem tất cả"} </Text>
             </View>
 
             <FlatList
@@ -66,62 +73,6 @@ const FriendNotification = (props) => {
     );
 };
 
-const styles = StyleSheet.create({
-    container: {
-        flex: 1,
-        //backgroundColor: '#242827',
-    },
-    HeaderWrap: {
-        flexDirection: 'row',
-        justifyContent: 'space-between'
-    },
-    title: {
-        color: 'white',
-        fontSize: 25,
-        marginLeft: 10,
-        fontWeight: 'bold',
-        marginTop: 10
-    },
-    findButton: {
-        marginRight: 10,
-        marginTop: 10,
-        backgroundColor: '#3c3c3c',
-        width: 35,
-        height: 35,
-        textAlign: 'center',
-        borderRadius: 500,
-        paddingTop: 3
-    },
-    titleWrap: {
-        flexDirection: 'row',
-        justifyContent: 'space-between'
-    },
-    title2: {
-        color: 'white',
-        fontWeight: 'bold',
-        fontSize: 15,
-        marginLeft: 10
-    },
-    seeAll: {
-        color: '#0265ff',
-        marginRight: 10
-    },
-    goiYWrap: {
-        flexDirection: 'row',
-        marginBottom: 15
-    },
-    goiY: {
-        backgroundColor: '#393d3e',
-        fontSize: 15,
-        color: 'white',
-        paddingVertical: 5,
-        paddingHorizontal: 5,
-        borderRadius: 500,
-        fontWeight: 'bold',
-        marginLeft: 10
-    }
 
-
-});
 
 export default FriendNotification;

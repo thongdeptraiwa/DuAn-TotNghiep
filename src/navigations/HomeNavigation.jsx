@@ -4,12 +4,14 @@ import FontAwesome from 'react-native-vector-icons/FontAwesome';
 import { createNativeStackNavigator } from '@react-navigation/native-stack';
 import { createBottomTabNavigator } from '@react-navigation/bottom-tabs';
 import { useSelector } from 'react-redux';
-
+import { useContext } from 'react';
+import { ThemeContext } from '../assets/context/ThemeContext';
 //tab tổng
 import Home from '../components/screens/Home';
 import Profile from '../components/screens/Profile';
 import Notification from '../components/screens/Notification';
 import FriendNotification from '../components/screens/FriendNotification';
+
 const oTab = {
   Home: { name: 'Home', component: Home },
   FriendNotification: { name: 'FriendNotification', component: FriendNotification },
@@ -18,8 +20,8 @@ const oTab = {
 }
 const Tab = createBottomTabNavigator();
 const TabHome = () => {
-  const theme = useSelector(state => state.app.theme);
-  //console.log(theme);
+  const {theme} = useContext(ThemeContext)
+  let activeColors = colors[theme.mode]  //console.log(theme);
   return (
     <Tab.Navigator
       initialRouteName='Home'
@@ -75,15 +77,24 @@ const TabHome = () => {
           return <FontAwesome name={name} size={size} color={color} />;
         },
         headerShown: false,
+        
         tabBarActiveTintColor: '#D17842',
         // tabBarActiveBackgroundColor: "white",
         // tabBarInactiveBackgroundColor: "white",
-        tabBarActiveBackgroundColor: theme ? "white" : "#121212",
-        tabBarInactiveBackgroundColor: theme ? "white" : "#121212",
+        tabBarActiveBackgroundColor: activeColors.tertiary,
+        tabBarInactiveBackgroundColor: activeColors.tertiary,
         //ẩn bottom khi bàn phím xuất hiện
         tabBarHideOnKeyboard: true,
-
+        tabBarStyle: {
+          alignItems: 'center',
+          justifyContent: 'center',
+          backgroundColor: activeColors.tint, // Màu nền
+          borderRadius: 50, // Bo góc
+          borderColor: activeColors.tint, // Màu viền
+          height: 50, // Chiều cao của thanh tab
+        }
       })}
+      
     >
       {
         Object.keys(oTab).map((item, index) => {
@@ -108,6 +119,7 @@ import SelectImage from '../components/screens/SelectImage';
 import UpPost from '../components/screens/UpPost';
 import Search from '../components/screens/Search';
 import Setting from '../components/screens/Setting';
+import colors from '../assets/colors';
 const oStackHome = {
   TabHome: { name: 'TabHome', component: TabHome },
   SelectImage: { name: 'SelectImage', component: SelectImage },

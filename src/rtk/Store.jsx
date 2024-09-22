@@ -11,6 +11,7 @@ import {
     PURGE,
     REGISTER,
 } from 'redux-persist'
+import { Alert } from "react-native";
 
 const persistConfig = {
     key: 'root',
@@ -32,6 +33,26 @@ export const store = configureStore({
             },
         }),
 });
+
+export const storeData = async (key, value) => {
+    try{
+        const jsonValue = JSON.stringify(value);
+        await AsyncStorage.setItem(key, jsonValue)
+    }
+    catch({message}) {
+        Alert.alert(message)
+    }
+}
+
+export const getData = async (key) => {
+    try{
+        const jsonValue = await AsyncStorage.getItem(key)
+        return jsonValue != null ? JSON.parse(jsonValue) : null
+    }
+    catch({message}) {
+        Alert.alert(message)
+    }
+}
 
 export const persistor = persistStore(store)
 

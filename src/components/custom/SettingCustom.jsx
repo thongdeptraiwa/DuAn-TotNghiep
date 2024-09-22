@@ -1,28 +1,31 @@
-import React, { useEffect, useState } from 'react';
+import React, { useState } from 'react';
 import MenuSettingS from '../styles/custom/items/MenuSetting';
 import { logout, setTheme, setLanguage } from '../../rtk/Reducer';
 import { useDispatch, useSelector } from 'react-redux';
 import { View, Text, Pressable, ToastAndroid, Switch, Image, Alert } from 'react-native';
 import Icon from 'react-native-vector-icons/Ionicons';
-import Animated, { useSharedValue, useAnimatedStyle, withTiming } from 'react-native-reanimated';
-
+import { useContext } from 'react';
+import { ThemeContext } from '../../assets/context/ThemeContext';
+import colors from '../../assets/colors';
 
 export const CustomAccountCentre = () => {
-    const theme = useSelector(state => state.app.theme);
+    const {theme} = useContext(ThemeContext)
+    let activeColors = colors[theme.mode]   
     const language = useSelector(state => state.app.language);
     //save-outline
     return (
         <Pressable>
             <View style={MenuSettingS.section}>
                 <Icon name="people-circle-outline" size={30} color={theme ? "black" : "white"} style={MenuSettingS.icon} />
-                <Text style={[MenuSettingS.textSection, { color: theme ? "black" : "white" }]}>{language ? "Account Centre" : "Trung tâm tài khoản"}</Text>
+                <Text style={[MenuSettingS.textSection, { color:theme ? "black" : "white" }]}>{language ? "Account Centre" : "Trung tâm tài khoản"}</Text>
             </View>
         </Pressable>
     )
 };
 
 export const CustomSaved = () => {
-    const theme = useSelector(state => state.app.theme);
+    const {theme} = useContext(ThemeContext)
+    let activeColors = colors[theme.mode]
     const language = useSelector(state => state.app.language);
     //save-outline
     return (
@@ -36,7 +39,8 @@ export const CustomSaved = () => {
 };
 
 export const CustomComments = () => {
-    const theme = useSelector(state => state.app.theme);
+    const {theme} = useContext(ThemeContext)
+    let activeColors = colors[theme.mode]
     const language = useSelector(state => state.app.language);
     //save-outline
     return (
@@ -50,7 +54,8 @@ export const CustomComments = () => {
 };
 
 export const CustomTab = () => {
-    const theme = useSelector(state => state.app.theme);
+    const {theme} = useContext(ThemeContext)
+    let activeColors = colors[theme.mode]
     const language = useSelector(state => state.app.language);
     return (
         <Pressable>
@@ -61,132 +66,76 @@ export const CustomTab = () => {
         </Pressable>
     )
 };
+
 export const CustomLanguage = () => {
     const [switchValue, setSwitchValue] = useState(false);
     const dispatch = useDispatch();
-    const theme = useSelector(state => state.app.theme);
+    const {theme} = useContext(ThemeContext)
+    let activeColors = colors[theme.mode]
     const language = useSelector(state => state.app.language);
-
-    // Shared value để lưu trữ vị trí của icon trong thanh Switch
-    const translateX = useSharedValue(0);
 
     const onLanguage = () => {
         dispatch(setLanguage());
-        setSwitchValue(!switchValue);
-
-        // Thay đổi giá trị translateX dựa trên switchValue
-        translateX.value = switchValue ? withTiming(0) : withTiming(35); // Chuyển đổi vị trí
-    };
-
-    // Sử dụng Animated Style cho icon
-    const animatedStyle = useAnimatedStyle(() => {
-        return {
-            transform: [{ translateX: translateX.value }]
-        };
-    });
-
+        setSwitchValue(prevValue => !prevValue);
+    }
     return (
         <Pressable>
             <View style={MenuSettingS.section}>
                 <Icon name="globe-outline" size={30} color={theme ? "black" : "white"} style={MenuSettingS.icon} />
-                <Text style={[MenuSettingS.textSection, { color: theme ? "black" : "white" }]}>
-                    {language ? "Language:  " : "Ngôn ngữ:  "}
+                <Text style={[MenuSettingS.textSection,
+                { color: theme ? "black" : "white" }]}>
+                    {language ? "Language: ENG " : "Ngôn ngữ: VN "}
                 </Text>
                 <Pressable onPress={onLanguage}>
-                    <View style={{
-                        width: 60,  // Chiều rộng của thanh Switch
-                        height: 25, // Chiều cao của thanh Switch
-                        borderRadius: 30,
-                        backgroundColor: switchValue ? "#92b7f5" : "#eee", // Thay đổi màu nền dựa trên switchValue
-                        justifyContent: 'center',
-                    }}>
-                        <Animated.View style={[{
-                            width: 30,
-                            height: 30,
-                            borderRadius: 15,
-                            justifyContent: 'center',
-                            alignItems: 'center',
-                            backgroundColor: switchValue ? "#fff" : "#000", // Thay đổi màu nền
-                        }, animatedStyle]}>
-                            <Text style={{
-                                color: switchValue ? "#000" : "#fff" // Thay đổi màu chữ
-                            }}>
-                                {switchValue ? "VN" : "EN"}
-                            </Text>
-                        </Animated.View>
-                    </View>
+                    <Switch
+                        trackColor={{ false: "#eee", true: "#333" }}
+                        thumbColor={switchValue ? "#fff" : "#000"}
+                        ios_backgroundColor="#eee"// Màu nền của Switch trên iOS khi ở trạng thái tắt
+                        onValueChange={onLanguage}
+                        value={switchValue}
+                    />
                 </Pressable>
             </View>
         </Pressable>
-    );
+    )
 };
+
 export const CustomTheme = () => {
-    const [switchValue, setSwitchValue] = useState(false);
     const dispatch = useDispatch();
-    const theme = useSelector(state => state.app.theme); // true = dark, false = light
+    const { updateTheme, theme} = useContext(ThemeContext)
+    let activeColors = colors[theme.mode]
+    const [switchValue, setSwitchValue] = useState(theme.mode === "light");
+
     const language = useSelector(state => state.app.language);
 
-    // Shared value để lưu trữ vị trí của icon trong thanh Switch
-    const translateX = useSharedValue(0);
-
-    // Khi component render, đồng bộ giá trị switchValue và translateX với theme
-    useEffect(() => {
-        setSwitchValue(theme); // Đồng bộ switch với theme
-        translateX.value = theme ? withTiming(35) : withTiming(0); // Đồng bộ vị trí icon
-    }, [theme]);
-
-    const onThemeChange = () => {
-        dispatch(setTheme()); // Thay đổi theme trong Redux
-        setSwitchValue(prevValue => !prevValue); // Cập nhật giá trị switch
-
-        // Cập nhật vị trí translateX dựa trên switchValue hiện tại
-        translateX.value = switchValue ? withTiming(0) : withTiming(35); // Chuyển đổi vị trí
-    };
-
-    // Sử dụng Animated Style cho icon
-    const animatedStyle = useAnimatedStyle(() => {
-        'worklet';
-        return {
-            transform: [{ translateX: translateX.value }]
-        };
-    });
+    const onTheme = () => {
+        updateTheme();
+        setSwitchValue(prevValue => !prevValue);
+    }
 
     return (
-        <Pressable >
-            <View style={MenuSettingS.section}>
-                <Icon name={switchValue ? "moon" : "sunny-outline"} size={30} color={theme ? "black" : "white"} style={MenuSettingS.icon} />
-                <Text style={[MenuSettingS.textSection, { color: theme ? "black" : "white" }]}>
-                    {language ? (switchValue ? "Theme: " : "Theme: ") : (switchValue ? "Chế độ tối: " : "Chế độ sáng: ")}
-                </Text>
-                <Pressable onPress={onThemeChange}>
-                    <View style={{
-                        width: 60,  // Chiều rộng của thanh Switch
-                        height: 25, // Chiều cao của thanh Switch
-                        borderRadius: 30,
-                        backgroundColor: switchValue ? "#333" : "#eee", // Thay đổi màu nền dựa trên switchValue
-                        justifyContent: 'center',
-                    }}>
-                        <Animated.View style={[{
-                            width: 30,
-                            height: 30,
-                            borderRadius: 15,
-                            justifyContent: 'center',
-                            alignItems: 'center',
-                            backgroundColor: switchValue ? "#fff" : "#000", // Thay đổi màu nền
-                        }, animatedStyle]}>
-                            <Icon name={switchValue ? "moon" : "sunny-outline"} size={18} color={switchValue ? "#000" : "#fff"} />
-                        </Animated.View>
-                    </View>
-                </Pressable>
-            </View>
-        </Pressable>
+
+        <View style={MenuSettingS.section}>
+            <Icon name={switchValue ? "moon" : "sunny-outline"} size={30} color={theme ? "black" : "white"} style={MenuSettingS.icon} />
+            <Text style={[MenuSettingS.textSection, { color: theme ? "black" : "white" }]}>{language ? "Theme" : "Chế độ"} </Text>
+            <Pressable onPress={onTheme}>
+                <Switch
+                    trackColor={{ false: "#eee", true: "#333" }}
+                    thumbColor={switchValue ? "#fff" : "#000"}
+                    ios_backgroundColor="#eee"// Màu nền của Switch trên iOS khi ở trạng thái tắt
+                    onValueChange={onTheme}
+                    value={switchValue}
+                />
+            </Pressable>
+        </View>
     );
 };
 
 
 
 export const CustomBin = () => {
-    const theme = useSelector(state => state.app.theme);
+    const {theme} = useContext(ThemeContext)
+    let activeColors = colors[theme.mode]
     const language = useSelector(state => state.app.language);
     return (
         <Pressable>
@@ -198,7 +147,8 @@ export const CustomBin = () => {
     )
 };
 export const CustomMoreSetting = () => {
-    const theme = useSelector(state => state.app.theme);
+    const {theme} = useContext(ThemeContext)
+    let activeColors = colors[theme.mode]
     const language = useSelector(state => state.app.language);
     return (
         <Pressable>
@@ -213,7 +163,8 @@ export const CustomMoreSetting = () => {
 
 export const CustomLogout = () => {
     const dispatch = useDispatch();
-    const theme = useSelector(state => state.app.theme);
+    const {theme} = useContext(ThemeContext)
+    let activeColors = colors[theme.mode]
     const language = useSelector(state => state.app.language);
 
     const onLogout = () => {
@@ -248,4 +199,3 @@ export const CustomLogout = () => {
     );
 
 };
-

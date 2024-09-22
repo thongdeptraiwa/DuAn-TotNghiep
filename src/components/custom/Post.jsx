@@ -2,13 +2,16 @@ import { Image, Text, TouchableOpacity, View } from 'react-native'
 import React, { useState } from 'react'
 import PostS from '../styles/custom/items/PostS';
 import Icon from 'react-native-vector-icons/Ionicons';
-
+import { ThemeContext } from '../../assets/context/ThemeContext';
+import { useContext } from 'react';
+import colors from '../../assets/colors';
 const Post = (props) => {
     const { dataP } = props
     const [like, setLike] = useState(false)
-
+    const {theme} = useContext(ThemeContext)
+    const activeColors = colors[theme.mode]
     return (
-        <View style={PostS.container}>
+        <View style={[PostS.container, { backgroundColor: activeColors.tertiary }]}>
             <View style={PostS.h2}>
                 <View style={PostS.header}>
                     <View>

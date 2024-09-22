@@ -2,7 +2,9 @@ import { FlatList, Image, Pressable, ScrollView, StyleSheet, Text, TouchableOpac
 import React, { useState, useEffect } from 'react'
 import HomeS from '../styles/screens/HomeS';
 import Post from '../custom/Post';
-
+import colors from '../../assets/colors';
+import { useContext } from 'react';
+import { ThemeContext } from '../../assets/context/ThemeContext';
 // test Thong
 import { useDispatch } from 'react-redux';
 import { setTheme } from '../../rtk/Reducer';
@@ -57,6 +59,8 @@ const listPost = [
 const Home = (props) => {
     const { navigation } = props;
 
+    const {theme} = useContext(ThemeContext)
+    let activeColors = colors[theme.mode]
     //test Thong
     const [users, setUsers] = useState([]);
     const dispatch = useDispatch();
@@ -83,7 +87,7 @@ const Home = (props) => {
 
 
     return (
-        <View style={{ flex: 1, backgroundColor: "#f7f7f7" }}>
+        <View style={{ flex: 1, backgroundColor: activeColors.tertiary }}>
             <View style={HomeS.container}>
                 <View style={HomeS.header}>
                     <View>

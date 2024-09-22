@@ -4,6 +4,9 @@ import ProfileS from '../styles/screens/ProfileS';
 import Icon from 'react-native-vector-icons/Ionicons'; // Hoặc một bộ icon khác
 import ProfilePost from '../custom/ProfilePost';
 import { logout } from '../../rtk/Reducer';
+import { useContext } from 'react';
+import colors from '../../assets/colors';
+import { ThemeContext } from '../../assets/context/ThemeContext';
 let date = new Date().toDateString();
 
 // test Thong
@@ -45,15 +48,13 @@ const Profile = (props) => {
     const dispatch = useDispatch();
     const user = useSelector(state => state.app.user);
     const token = useSelector(state => state.app.token);
-    const theme = useSelector(state => state.app.theme);
+    const {theme} = useContext(ThemeContext)
+    const activeColors = colors[theme.mode]
     const language = useSelector(state => state.app.language);
 
     const [posts, setPosts] = useState([]);
 
-    const onLogout = () => {
-        dispatch(logout());
-        ToastAndroid.show('Đã đăng xuất', ToastAndroid.SHORT)
-    };
+   
     const onLanguage = () => {
         dispatch(setLanguage());
     };
@@ -83,7 +84,7 @@ const Profile = (props) => {
     })
 
     return (
-        <ScrollView style={[ProfileS.all, { backgroundColor: theme ? "#f7f7f7" : "#121212" }]}>
+        <ScrollView style={[ProfileS.all, { backgroundColor: activeColors.tertiary }]}>
             <View style={ProfileS.superBox}>
                 {/* header */}
                 <View style={ProfileS.container}>
